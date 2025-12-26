@@ -38,6 +38,7 @@ The architecture is built on four independent but integratable modules:
 
 ## 📂 Project Structure
 
+```text
 cognitive_arch/
 ├── core/                  # Base types (Belief, Thought, Goal, ReasoningTrace)
 ├── modules/
@@ -50,31 +51,38 @@ cognitive_arch/
     ├── demo_causal_reasoning.py
     ├── demo_analogical_reasoning.py
     └── demo_working_memory.py
+```
 
 ---
 
 ## 🚀 Quick Start
 
 ### 1. Installation
+
 No heavy dependencies (like Torch/TensorFlow) required. This is a pure Python symbolic framework.
 
+```bash
 # Clone the repository
-git clone https://github.com/yourusername/conductor-playground.git
+git clone [https://github.com/yourusername/conductor-playground.git](https://github.com/yourusername/conductor-playground.git)
 cd conductor-playground
 
 # Install dependencies
 pip install -r requirements.txt
-
+```
 
 ### 2. Running the Integrated Demo
+
 The best way to see the system in action is the integrated demo, which combines all modules to solve a complex reasoning task (Medical Diagnosis).
 
+```bash
 python -m cognitive_arch.examples.demo_integrated
-
+```
 
 ### 3. Basic Usage Example
+
 How to use the **Working Memory** module manually:
 
+```python
 from cognitive_arch.core.architecture import CognitiveArchitecture
 
 # Initialize the agent
@@ -90,7 +98,7 @@ memories = agent.recall("sky")
 
 for m in memories:
     print(f"Memory: {m.content} (Activation: {m.activation:.2f})")
-
+```
 
 ---
 
@@ -100,7 +108,9 @@ The project includes a comprehensive test suite with 87 unit tests covering algo
 
 To run the tests:
 
+```bash
 python -m unittest discover tests
+```
 
 ---
 
