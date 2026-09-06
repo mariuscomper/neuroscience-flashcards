@@ -1,29 +1,28 @@
-# 🔧 Technical Documentation - Neuroscience Flashcards Nobel Edition
+# Documentație tehnică — Neuroștiințe UBB și Nobel Edition
+
+> Stare verificată la 7 septembrie 2026: `neurostiinte-improved.html` este aplicația publică actuală și conține sistemul de bază cu 812 carduri. Referințele la `neurostiinte-nobel-edition.html`, D3.js, IndexedDB, service worker, PWA și funcțiile avansate de mai jos descriu o arhitectură propusă, nu funcții livrate.
 
 ## Architecture Overview
 
 ### Technology Stack
 
-- **Frontend Framework**: React 18.2.0 (via CDN)
-- **Visualization**: D3.js v7 (knowledge graph)
-- **Storage**: localStorage + IndexedDB (PWA)
-- **Service Worker**: For offline functionality
-- **Build**: None - pure HTML with embedded JavaScript
-- **Deployment**: Static hosting (GitHub Pages, Netlify, or local file)
+- **Interfață actuală**: React 18.2.0, ReactDOM și Babel Standalone (prin CDN)
+- **Vizualizare actuală**: interfața de studiu; D3.js pentru graf este doar propus
+- **Stocare actuală**: localStorage; IndexedDB este doar propus
+- **Service worker**: absent în aplicația publică actuală
+- **Construire**: nu există proces local; aplicația este un singur fișier HTML cu JavaScript inclus
+- **Publicare verificată**: GitHub Pages la `https://mariuscomper.github.io/neuroscience-flashcards/`
 
 ### File Structure
 
 ```
-neurostiinte-nobel-edition.html  # Main application (5000+ lines)
+neurostiinte-improved.html        # Aplicația publică actuală (812 carduri)
 ├── HTML Structure
 ├── Embedded CSS (inline styles)
 ├── React Components (Babel-transpiled JSX)
-├── Data Structures (NEURO_CARDS array, KNOWLEDGE_GRAPH, MNEMONICS)
-├── Algorithms (spaced repetition, exam generation, analytics)
-└── Service Worker integration
-
-sw.js                            # Service Worker (created on first run)
-manifest.json                    # PWA manifest (created on first run)
+├── Data Structures (NEURO_CARDS array și starea progresului)
+├── Algorithms (repetare spațiată și căutare textuală)
+└── Funcții Nobel Edition propuse (nu sunt integrate în acest fișier)
 ```
 
 ---
@@ -546,8 +545,7 @@ const analytics = useMemo(() => {
 
 **Features used:**
 - ES6+ (let/const, arrow functions, destructuring)
-- localStorage API
-- Service Worker API (for PWA)
+- localStorage API (pentru progresul local); service worker-ul este planificat, nu livrat
 - CSS Grid & Flexbox
 - SVG 1.1
 
@@ -558,24 +556,17 @@ const analytics = useMemo(() => {
 ### Option 1: Local File
 ```bash
 # Just open the file in browser
-open neurostiinte-nobel-edition.html
+open neurostiinte-improved.html
 ```
 
 ### Option 2: GitHub Pages
 ```bash
-git add neurostiinte-nobel-edition.html
-git commit -m "Add Nobel Edition"
+git add neurostiinte-improved.html
+git commit -m "Update neuroscience flashcards"
 git push origin main
 
-# Enable GitHub Pages in repo settings
-# URL: https://yourusername.github.io/repo-name/neurostiinte-nobel-edition.html
-```
-
-### Option 3: Netlify
-```bash
-# Drop file in Netlify deploy UI
-# Or use Netlify CLI
-netlify deploy --prod --dir=.
+# Pages este deja configurat; rădăcina redirecționează la aplicație.
+# URL: https://mariuscomper.github.io/neuroscience-flashcards/
 ```
 
 ---
@@ -583,14 +574,14 @@ netlify deploy --prod --dir=.
 ## Development Workflow
 
 ### Making changes:
-1. Edit `neurostiinte-nobel-edition.html`
+1. Edit `neurostiinte-improved.html` for changes to the current public app
 2. Refresh browser to see changes
 3. Test in DevTools console
 4. Commit to git
 
 ### Debugging:
 - Chrome DevTools → Application → localStorage
-- React DevTools (if using extension)
+- React DevTools (if using the browser extension)
 - Console logs (search for "// DEBUG:")
 
 ### Testing localStorage:
@@ -607,7 +598,7 @@ localStorage.clear(); // Reset all data
 1. **No cloud sync** - Data only in one browser
 2. **Storage limits** - localStorage ~10MB limit
 3. **No collaborative features** - Single-user only
-4. **Basic PWA** - No advanced offline strategies
+4. **No PWA în versiunea actuală** - nu există service worker sau mod offline garantat
 5. **Manual page refs** - Not linked to actual PDF
 
 ---
@@ -623,6 +614,5 @@ localStorage.clear(); // Reset all data
 
 ---
 
-**Last Updated**: 2024-12-30
-**Version**: 3.0.0 (Nobel Edition)
-**Maintainer**: Claude Code Agent
+**Last Updated**: 2026-09-07
+**Version**: 2.0.0 (aplicația de bază; Nobel Edition — plan)

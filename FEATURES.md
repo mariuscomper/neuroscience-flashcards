@@ -1,6 +1,8 @@
-# 🎯 Features - Neuroscience Flashcards Nobel Edition
+# Funcționalități — Neuroștiințe UBB și Nobel Edition
 
-## Complete Feature List
+> Stare verificată la 7 septembrie 2026: numai secțiunea „Core Flashcard System” descrie funcții din aplicația publică `neurostiinte-improved.html`. Restul documentului este o listă de idei și specificații pentru Nobel Edition; bifele din acele secțiuni nu reprezintă funcții livrate.
+
+## Funcții actuale și plan de dezvoltare
 
 ### 🎴 Core Flashcard System
 - ✅ **812 comprehensive cards** across 6 modules
@@ -12,15 +14,15 @@
 
 ---
 
-### 📊 Interactive Diagrams (NEW!)
+### 📊 Diagrame interactive (planificate)
 
 **6 Essential Diagrams:**
-1. ✅ Neuron Structure (functional zones)
-2. ✅ Tripartite Synapse (pre, post, astrocyte)
-3. ✅ Visual Pathways (retina → V1 with decussation)
-4. ✅ Retina Layers (photoreceptors → ganglion cells)
-5. ✅ Neural Tube Formation (plate → tube → vesicles)
-6. ✅ CSF Circulation (ventricles → subarachnoid space)
+1. 📝 Neuron Structure (functional zones)
+2. 📝 Tripartite Synapse (pre, post, astrocyte)
+3. 📝 Visual Pathways (retina → V1 with decussation)
+4. 📝 Retina Layers (photoreceptors → ganglion cells)
+5. 📝 Neural Tube Formation (plate → tube → vesicles)
+6. 📝 CSF Circulation (ventricles → subarachnoid space)
 
 **Features:**
 - SVG-based, embedded in HTML
@@ -31,7 +33,7 @@
 
 ---
 
-### 🕸️ Knowledge Graph (NEW!)
+### 🕸️ Knowledge Graph (planificat)
 
 **Visual Concept Mapping:**
 - **100+ nodes** (key concepts from all modules)
@@ -48,7 +50,7 @@
 
 ---
 
-### 🎓 Exam Simulator (NEW!)
+### 🎓 Exam Simulator (planificat)
 
 **Realistic Exam Environment:**
 - **50 questions** (customizable)
@@ -67,7 +69,7 @@
 
 ---
 
-### 📈 Advanced Analytics (NEW!)
+### 📈 Advanced Analytics (planificate)
 
 **Dashboard Insights:**
 
@@ -102,7 +104,7 @@
 
 ---
 
-### 📚 Multiple Study Modes (NEW!)
+### 📚 Multiple Study Modes (planificate)
 
 **5 Modes for Active Learning:**
 
@@ -136,7 +138,7 @@
 
 ---
 
-### 🧩 Integrated Mnemonics (NEW!)
+### 🧩 Mnemonice integrate (planificate)
 
 **10+ Memory Aids:**
 
@@ -166,7 +168,7 @@
 
 ---
 
-### 🔍 Smart Search (NEW!)
+### 🔍 Căutare avansată (planificată)
 
 **Advanced Search Capabilities:**
 
@@ -201,7 +203,7 @@
 
 ---
 
-### 🏆 Gamification System (NEW!)
+### 🏆 Sistem de gamificare (planificat)
 
 **Level System:**
 - **7 levels**: Beginner → Grandmaster
@@ -262,7 +264,7 @@
 
 ---
 
-### 📱 PWA & Offline Support (NEW!)
+### 📱 PWA și funcționare offline (planificate)
 
 **Progressive Web App:**
 - **Install prompt** on mobile/desktop
@@ -270,11 +272,11 @@
 - Standalone app experience
 - App icon & splash screen
 
-**Offline-First Architecture:**
-- **Service Worker** caches all assets
-- Study without internet
+**Arhitectură offline propusă:**
+- Un service worker ar putea pune în cache resursele
+- Studiul fără internet ar fi posibil după implementare
 - **Automatic sync** when online
-- **Offline indicator**: "🔴 Offline - changes will sync"
+- **Indicator offline**: funcție propusă, nu disponibilă în aplicația actuală
 
 **Background Sync:**
 - Queue changes while offline
@@ -384,9 +386,9 @@ Potential enhancements:
 ## Technical Stack
 
 - **Frontend**: React (via CDN)
-- **Visualization**: D3.js (knowledge graph)
-- **Storage**: localStorage + IndexedDB (for PWA)
-- **Service Worker**: Offline-first caching
+- **Visualization**: interfața actuală nu include graf; D3.js este planificat pentru Nobel Edition
+- **Storage**: localStorage în aplicația actuală; IndexedDB este planificat
+- **Service Worker**: planificat, absent din versiunea publică
 - **No build step**: Pure HTML + embedded JS
 - **No backend needed**: 100% client-side
 
@@ -395,6 +397,5 @@ Potential enhancements:
 **Total Features: 50+**
 **Lines of Code: ~5000+**
 **File Size: ~500KB**
-**Offline-Ready: Yes**
-**Mobile-Optimized: Yes**
-**Nobel-Worthy: Absolutely! 🏆**
+**Offline-Ready: No — planificat, neverificat**
+**Mobile-Optimized: Responsive core app; enhancements planned**

@@ -37,7 +37,7 @@ open neurostiinte-improved.html
 - **Progress tracking** with persistent localStorage
 - **Due cards dashboard** - see what needs review today
 - **Module-based study** - focus on specific topics
-- **Rating system** (0-5) for self-assessment
+- **Rating system** (1, 3, 4 or 5) for self-assessment
 - **Automatic scheduling** based on performance
 - **Study statistics** and progress visualization
 
@@ -82,10 +82,10 @@ Evening (15 min):
 
 ### 2. Rating System
 
-- **0-2**: Didn't know → Card resets, review soon
-- **3**: Barely knew → Small interval increase
-- **4**: Knew well → Moderate interval increase
-- **5**: Knew perfectly → Large interval increase
+- **1 — Nu știam**: cardul își resetează progresul și revine curând la repetare
+- **3 — Greu**: intervalul crește puțin
+- **4 — Bine**: intervalul crește moderat
+- **5 — Ușor**: intervalul crește mai mult
 
 **Mastery:** 3+ successful repetitions = mastered card
 

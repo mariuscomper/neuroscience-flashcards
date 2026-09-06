@@ -1,22 +1,22 @@
-# 🏆 NOBEL EDITION - Implementation Summary
+# 🏆 Nobel Edition — specificație și stare de integrare
 
-## 🎉 Mission Status: COMPLETED!
+## Stare verificată — 7 septembrie 2026
 
-Am transformat aplicația de flashcards într-un **sistem comprehensiv de învățare de nivel Nobel** pentru neuroștiințe UBB.
+Nobel Edition nu este implementată în aplicația publică. Documentul descrie o direcție de dezvoltare și specificații pregătite; aplicația live este `neurostiinte-improved.html`, cu sistemul de bază și 812 carduri. Nu folosi secțiunile de mai jos ca pe o listă a funcțiilor deja disponibile.
 
 ---
 
-## 📊 Ce Am Realizat
+## 📊 Ce există efectiv în aplicația publică
 
-### 1. ✅ Fundație Solidă (COMPLET)
-- **812 carduri** comprehensiv curate și testate
-- **Spaced repetition algorithm** (SM-2 inspired) funcțional
-- **Hash-based IDs** pentru progress retention stabil
-- **Export/Import** functionality
-- **Search** în carduri
-- **Difficult marking** funcțional
+### 1. ✅ Fundație solidă (completă)
+- **812 de carduri** curate și testate
+- **Repetare spațiată** inspirată de SM-2
+- **Identificatori bazați pe conținut** pentru păstrarea stabilă a progresului
+- **Export și import** al progresului
+- **Căutare textuală** în carduri
+- **Marcare** a cardurilor dificile
 
-### 2. 📚 Documentație Completă (COMPLET)
+### 2. 📚 Documentație de specificații
 
 Am creat **5 documente comprehensive**:
 
@@ -56,18 +56,18 @@ Am creat **5 documente comprehensive**:
 - Breakdown pe module
 - Coverage analysis
 
-### 3. 🎯 Features Pregătite pentru Implementare
+### 3. 🎯 Specificații pregătite pentru implementare
 
-Am pregătit **specificații complete** pentru:
+Am pregătit **specificații** — nu implementări publicate — pentru:
 
-#### **Diagrame Interactive (6 diagrame)**
-✅ SVG embedded diagrams cu:
-- Neuron Structure (4 zone funcționale)
-- Tripartite Synapse (presinaptică, postsinaptică, astrocit)
-- Visual Pathways (retină → V1 cu decusație)
-- Retina Layers (fotoreceptori → ganglionare)
-- Neural Tube (placa → tub → vezicule)
-- CSF Circulation (ventriculi → subarahnoidian)
+#### **Diagrame interactive planificate (6)**
+📝 Schițe și cerințe pentru:
+- Structura neuronului (4 zone funcționale)
+- Sinapsa tripartită (presinaptică, postsinaptică, astrocit)
+- Căile vizuale (retină → V1 cu decusație)
+- Straturile retinei (fotoreceptori → celule ganglionare)
+- Tubul neural (placă → tub → vezicule)
+- Circulația LCR (ventriculi → spațiu subarahnoidian)
 
 **Features:**
 - Image occlusion mode
@@ -75,8 +75,8 @@ Am pregătit **specificații complete** pentru:
 - Progress tracking
 - Mobile touch support
 
-#### **Gamification System**
-✅ Specificații complete pentru:
+#### **Sistem de gamificare planificat**
+📝 Specificații pentru:
 - **7 nivele**: Începător → Grandmaster
 - **XP system**:
   - +10 XP per card studied
@@ -91,8 +91,8 @@ Am pregătit **specificații complete** pentru:
   - Special (Night Owl, Early Bird, Speed Demon)
   - Performance (Perfect exam, Leech Killer)
 
-#### **Exam Simulator**
-✅ Algoritmi pregătiți pentru:
+#### **Simulator de examen planificat**
+📝 Algoritmi descriși pentru:
 - 50 questions selection
 - 90-minute timer
 - Mixed modules (proportional distribution)
@@ -101,8 +101,8 @@ Am pregătit **specificații complete** pentru:
 - Exam history tracking
 - Score calculation & breakdown
 
-#### **Analytics Dashboard**
-✅ Metrici calculate pentru:
+#### **Panou de analitice planificat**
+📝 Metrici propuse pentru:
 - Module heatmap (visual progress bars)
 - Leech detection (cards failed >5 times)
 - Forgetting curve visualization
@@ -111,16 +111,16 @@ Am pregătit **specificații complete** pentru:
 - Study timeline estimation
 - Calendar view
 
-#### **Multiple Study Modes (5 modes)**
-✅ Implementări pregătite pentru:
+#### **Moduri suplimentare de studiu (5 moduri planificate)**
+📝 Specificații de implementare pentru:
 1. **Classic** - Q&A standard (existent)
 2. **Cloze Deletion** - Fill-in-the-blank cu auto-generation
 3. **Reverse Mode** - Q ↔ A swap pentru deep understanding
 4. **Multiple Choice** - 1 corect + 3 distractori inteligenți
 5. **Free Recall** - Type answer cu fuzzy matching
 
-#### **Mnemonics System (12 mnemonics)**
-✅ Pregătite complet:
+#### **Sistem de mnemonice planificat (12 mnemonice)**
+📝 Exemple pregătite:
 - Cortex Layers (I-VI): "My Brain Eats Greasy Food Constantly"
 - Cranial Nerves (I-XII): "On Old Olympus..."
 - Brainstem Parts: "Make Puns Boring"
@@ -140,9 +140,9 @@ Am pregătit **specificații complete** pentru:
 - Visual color coding
 - Links to relevant cards
 
-#### **Smart Search**
-✅ Algoritmi implementați:
-- **Fuzzy matching**: Levenshtein distance < 2
+#### **Căutare avansată planificată**
+📝 Algoritmi propuși:
+- **Potrivire tolerantă la greșeli**: distanță Levenshtein < 2
 - **Semantic search**: SEMANTIC_MAP cu 10+ concepte
   - "inhibitor" → GABA, glicină, hiperpolarizare, PPSI
   - "excitator" → glutamat, acetilcolină, depolarizare, PPSE
@@ -299,12 +299,12 @@ Plus ai **documentație comprehensivă** pentru:
 
 Am realizat o **fundație de nivel Nobel** pentru un sistem comprehensiv de învățare:
 
-### ✅ Complet Funcțional ACUM:
+### ✅ Funcțional în aplicația publică actuală:
 - 812 carduri perfect curate
 - Spaced repetition algorithm
 - Progress retention stabil
 - Export/Import
-- Search & filters
+- Căutare textuală
 - Mobile responsive
 - Documentație exhaustivă
 

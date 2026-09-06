@@ -1,17 +1,12 @@
-# 🚀 PLAN DE INTEGRARE - Neuroscience Flashcards Nobel Edition
+# Plan de integrare — Neuroștiințe UBB, Nobel Edition
 
-## STATUS AGENȚI (în progres):
+## Stare verificată — 7 septembrie 2026
 
-1. **abc932c** - Diagrame Interactive ✓ (în lucru)
-2. **a123754** - Knowledge Graph ✓ (în lucru, 420k+ tokens)
-3. **a893960** - Exam Simulator + Analytics ✓ (în lucru, 1M+ tokens)
-4. **a758f37** - Study Modes + Mnemonics ✓ (în lucru, 380k tokens)
-5. **a89d8ca** - Search Inteligent + PWA ✓ (în lucru, 256k+ tokens)
-6. **aa0809b** - Gamification System ✓ (în lucru, 242k+ tokens)
+Planul de mai jos este o propunere arhivată, nu o execuție în curs. Identificatorii agenților și stările „în lucru” provin dintr-un jurnal istoric; nu există aceste rezultate în aplicația publică actuală.
 
 ---
 
-## ARHITECTURĂ FINALĂ:
+## Arhitectură propusă
 
 ### Fișiere Output Așteptate:
 - `neurostiinte-improved.html` (original cu 812 carduri)
@@ -35,7 +30,7 @@
 - Con: Mai complexă structura
 
 **DECIZIE: Opțiunea A - Un singur fișier mega-comprehensiv**
-Motivație: App-ul e offline-first, no build step, vrem simplitate maximă
+Motivație inițială: un singur fișier fără proces local de construire. Aplicația actuală încarcă însă React, ReactDOM și Babel de pe CDN și nu oferă PWA sau funcționare offline garantată.
 
 ---
 
@@ -157,7 +152,7 @@ git commit -m "feat: Integrate all Nobel-level features"
 
 ---
 
-## NEXT STEPS (când agenții termină):
+## Pași următori, dacă proiectul este reluat
 
 1. Colectez toate output-urile
 2. Analizez conflictele de state
@@ -172,4 +167,4 @@ git commit -m "feat: Integrate all Nobel-level features"
 
 **ETA: ~5 ore** (conform cererii utilizatorului)
 
-Status: 🔥 IN PROGRESS - Toți agenții lucrează activ
+Status: PAUSED — funcțiile Nobel Edition nu sunt implementate în versiunea publică.
