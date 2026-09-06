@@ -1,21 +1,24 @@
-# 🧠 Neuroscience Flashcards - UBB
+# 🧠 Neuroștiințe UBB — fișe de recapitulare
 
-A comprehensive spaced repetition flashcard application for neuroscience studies, with Nobel Edition features planned.
+A comprehensive spaced repetition flashcard application for neuroscience studies. The current public app contains the core 812-card study system; the Nobel Edition remains a documented future roadmap.
 
 ![Status](https://img.shields.io/badge/Status-Production_Ready-green)
 ![Cards](https://img.shields.io/badge/Cards-812-blue)
 ![Modules](https://img.shields.io/badge/Modules-6-purple)
-![Features](https://img.shields.io/badge/Features-50+-orange)
+![Roadmap](https://img.shields.io/badge/Roadmap-documented-orange)
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Simply open the HTML file in your browser
+# Deschide aplicația direct în browser
 open neurostiinte-improved.html
 
-# No installation, no build, no server needed!
+# Nu este necesar un proces de construire; încărcarea inițială are nevoie de internet
+# pentru bibliotecile și fonturile încărcate de pe CDN.
+# Adresa publică:
+# https://mariuscomper.github.io/neuroscience-flashcards/
 ```
 
 ---
@@ -40,9 +43,9 @@ open neurostiinte-improved.html
 
 ### 📱 Technical Excellence
 - **Pure client-side** - no server needed
-- **Offline-first** - works without internet
+- **Browser-local progress** - study data stays in localStorage
 - **Mobile responsive** - study anywhere
-- **Fast & lightweight** - loads instantly
+- **Fast & lightweight** - no local build step
 - **Privacy-focused** - all data stays local
 
 ---
@@ -116,7 +119,7 @@ For developers and curious minds:
 - Deployment guide
 
 ### 🎯 [Features List](FEATURES.md)
-Detailed breakdown of all 50+ features:
+Detailed breakdown of the current core and planned features:
 - Core learning system
 - Study modes
 - Analytics
@@ -124,7 +127,7 @@ Detailed breakdown of all 50+ features:
 - Technical specs
 
 ### 🏆 [Nobel Edition Summary](NOBEL_EDITION_SUMMARY.md)
-Vision for future enhancements:
+Documented future enhancements, not part of the current public app:
 - Interactive diagrams (6 planned)
 - Gamification system
 - Exam simulator
@@ -133,16 +136,16 @@ Vision for future enhancements:
 - Mnemonics integration
 
 ### 📋 [Integration Plan](INTEGRATION_PLAN.md)
-Implementation roadmap for Nobel Edition features
+Implementation roadmap for the future Nobel Edition
 
 ### 📊 [Final Report](RAPORT_FINAL.md)
 Detailed report on the 118 new cards added to reach 812 total
 
 ---
 
-## 🌟 Nobel Edition (Planned Features)
+## 🌟 Nobel Edition roadmap
 
-We've designed a comprehensive upgrade path with full specifications:
+The repository contains specifications for a possible future upgrade. These features are not part of the current public app:
 
 ### 🎨 Interactive Diagrams (6 diagrams)
 - Neuron structure with functional zones
@@ -200,12 +203,12 @@ We've designed a comprehensive upgrade path with full specifications:
 
 ## 🛠️ Technical Stack
 
-- **Frontend**: React 18 (via CDN)
+- **Frontend**: React 18 and Babel Standalone (via CDN)
 - **Storage**: localStorage
-- **Build**: None - pure HTML
-- **Deployment**: Static hosting
+- **Build**: None - a single HTML application
+- **Deployment**: GitHub Pages
 
-**No dependencies, no build step, no backend needed!**
+The app has no backend and no local package installation, but its first load needs network access to fetch the CDN libraries and fonts.
 
 ---
 
@@ -226,7 +229,7 @@ We've designed a comprehensive upgrade path with full specifications:
 - **No tracking** - zero analytics or telemetry
 - **No account** - no signup, no login
 - **Exportable** - full data export anytime
-- **Offline** - works without internet
+- **Browser-local data** - progress remains in localStorage on the current browser
 
 ---
 
@@ -239,14 +242,8 @@ open neurostiinte-improved.html
 
 ### Option 2: GitHub Pages
 ```bash
-# Already set up! Just visit:
-# https://yourusername.github.io/repo-name/neurostiinte-improved.html
-```
-
-### Option 3: Netlify
-```bash
-# Drop file in Netlify dashboard
-# Or: netlify deploy --prod --dir=.
+# Already set up; the root address redirects to the application:
+# https://mariuscomper.github.io/neuroscience-flashcards/
 ```
 
 ---
@@ -261,7 +258,7 @@ open neurostiinte-improved.html
 
 ### Development
 - **5 documentation files** (2,100+ lines)
-- **50+ features** specified
+- **50+ features** specified across the current app and future roadmap
 - **8+ algorithms** detailed
 - **6 interactive diagrams** designed
 - **12 mnemonics** prepared
@@ -271,7 +268,7 @@ open neurostiinte-improved.html
 - **Spaced repetition** reduces study time by 40-60%
 - **Progress retention** prevents lost work
 - **Mobile access** enables studying anywhere
-- **Offline support** works without internet
+- **Browser-local progress** keeps study data on the current device
 
 ---
 
