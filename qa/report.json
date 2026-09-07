@@ -1,7 +1,7 @@
 {
   "$schema": "../../standards/v2/qa-report.schema.json",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T00:29:02Z",
+  "generatedAt": "2026-09-07T00:56:56Z",
   "target": "https://mariuscomper.github.io/neuroscience-flashcards/",
   "overallStatus": "blocked",
   "checks": [
@@ -9,7 +9,7 @@
       "id": "scope-and-reader-value",
       "module": "core",
       "status": "pass",
-      "evidence": "Versiunea livrată transformă setul existent într-un laborator de studiu: reamintire activă, repetare spațiată, Atlas, examen și progres local, cu delimitarea clară a limitelor educaționale."
+      "evidence": "Scopul este explicit pentru cei care se pregătesc pentru admiterea la Psihologie la UBB Cluj; aplicația oferă reamintire activă, repetare spațiată, Atlas, examen și progres local, cu delimitarea clară a limitelor educaționale."
     },
     {
       "id": "sources-and-claims",
@@ -21,7 +21,7 @@
       "id": "production-build",
       "module": "core",
       "status": "pass",
-      "evidence": "Site static fără build: node --check a trecut pentru cards-data.js, nobel-app.js și sw.js; manifestul este JSON valid; git diff --check a trecut."
+      "evidence": "Site static fără build: node --check a trecut pentru cards-data.js, neuro-app.js și sw.js; manifestul este JSON valid; git diff --check a trecut."
     },
     {
       "id": "delivered-content",
@@ -75,7 +75,7 @@
       "id": "closeout",
       "module": "core",
       "status": "pass",
-      "evidence": "Implementarea este publicată în commitul a87562e; README-ul, ghidul, lista funcționalităților, planul, documentația tehnică și rezumatul Nobel Edition au fost sincronizate cu starea reală. Captura mobilă rămâne explicit închisă ca verificare restantă."
+      "evidence": "Implementarea este publicată în commitul a87562e; README-ul, ghidul, lista funcționalităților, planul, documentația tehnică și rezumatul produsului au fost sincronizate cu starea reală. Captura mobilă rămâne explicit închisă ca verificare restantă."
     }
   ],
   "finalCaptures": []

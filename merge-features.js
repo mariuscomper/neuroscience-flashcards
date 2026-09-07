@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * MERGE SCRIPT - Nobel Edition Features Integration
+ * MERGE SCRIPT - Neuroscience Features Integration
  *
  * Acest script merge toate features-urile create de agenți într-un singur fișier final.
  */
@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('🚀 Starting Nobel Edition Integration...\n');
+console.log('🚀 Starting neuroscience study app integration...\n');
 
 // Fișiere de input (create de agenți)
 const files = {
@@ -169,7 +169,7 @@ if (available.gamification) {
 }
 
 // Scrie fișierul final
-const outputFile = 'neurostiinte-nobel-edition.html';
+const outputFile = 'neurostiinte-bundle.html';
 console.log(`\n💾 Writing final file: ${outputFile}...`);
 fs.writeFileSync(outputFile, baseHTML);
 
@@ -180,7 +180,7 @@ console.log(`  ✓ File created: ${sizeKB} KB`);
 
 console.log('\n🎉 Integration complete!\n');
 console.log('Next steps:');
-console.log('  1. Open neurostiinte-nobel-edition.html în browser');
+console.log('  1. Open neurostiinte-bundle.html în browser');
 console.log('  2. Test toate features');
 console.log('  3. Fix any bugs');
 console.log('  4. Commit to git');

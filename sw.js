@@ -1,10 +1,10 @@
-const CACHE_NAME = 'neuro-nobel-v1';
+const CACHE_NAME = 'neuro-ubb-admitere-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './neurostiinte-improved.html',
   './cards-data.js',
-  './nobel-app.js',
+  './neuro-app.js',
   './manifest.webmanifest',
   './icon-192.svg',
   './icon-512.svg'

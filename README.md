@@ -1,6 +1,6 @@
-# Neuroștiințe UBB — Nobel Edition
+# Neuroștiințe pentru admiterea la Psihologie UBB Cluj
 
-Un laborator local de studiu pentru neuroștiințe: 812 de carduri, repetare spațiată, moduri de reamintire, atlas vizual și simulări de examen.
+Un instrument independent de studiu pentru cei care se pregătesc pentru admiterea la Psihologie la UBB Cluj: 812 de carduri de neuroștiințe, repetare spațiată, moduri de reamintire, atlas vizual și simulări de examen.
 
 **Aplicația live:** [mariuscomper.github.io/neuroscience-flashcards](https://mariuscomper.github.io/neuroscience-flashcards/)
 
@@ -40,9 +40,9 @@ Apoi deschide `http://localhost:8000/neurostiinte-improved.html`.
 
 Fișierele aplicației sunt:
 
-- `neurostiinte-improved.html` — shell HTML și metadate;
+- `neurostiinte-improved.html` — shell HTML, metadate și descrierea publicului;
 - `cards-data.js` — setul de carduri;
-- `nobel-app.js` — interfață, repetare, atlas, examen și progres;
+- `neuro-app.js` — interfață, repetare, atlas, examen și progres;
 - `manifest.webmanifest`, `sw.js`, pictogramele — instalare și cache offline.
 
 ## Cum se studiază
@@ -57,10 +57,10 @@ Comanda `/` duce la căutare, iar bara de spațiu afișează răspunsul în modu
 - [Lista funcționalităților](FEATURES.md)
 - [Documentație tehnică](TECHNICAL.md)
 - [Planul livrat și backlogul](INTEGRATION_PLAN.md)
-- [Rezumatul Nobel Edition](NOBEL_EDITION_SUMMARY.md)
+- [Rezumatul produsului](PRODUCT_SUMMARY.md)
 - [Raportul celor 812 carduri](RAPORT_FINAL.md)
 - [Raportul QA](qa/report.json)
 
 ## Limite asumate
 
-„Nobel Edition” este numele unei versiuni de produs, nu o certificare științifică. Cardurile provin din materialul de studiu existent și nu înlocuiesc verificarea cu suportul de curs, literatura de specialitate sau sfatul medical. Nu există cont, sincronizare în cloud, predicție validată a notei ori evaluare clinică.
+Aplicația este un instrument independent, nu un produs oficial UBB și nu garantează rezultatul la admitere. Cardurile provin din materialul de studiu existent și nu înlocuiesc verificarea cu suportul de curs, literatura de specialitate sau sfatul medical. Nu există cont, sincronizare în cloud, predicție validată a notei ori evaluare clinică.

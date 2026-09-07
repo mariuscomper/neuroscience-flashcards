@@ -4,7 +4,8 @@
   var root = document.getElementById('root');
   var rawCards = [];
   var appStarted = false;
-  var STORAGE_KEY = 'neuro-nobel-v1';
+  var STORAGE_KEY = 'neuro-ubb-admitere-v1';
+  var LEGACY_PRODUCT_KEY = 'neuro-nobel-v1';
   var LEGACY_STORAGE_KEY = 'neuro-improved-v2';
   var now = function () { return new Date(); };
 
@@ -269,8 +270,10 @@
 
   function loadData() {
     var saved = safeParse(STORAGE_KEY);
-    var legacy = saved ? null : safeParse(LEGACY_STORAGE_KEY);
-    var savedCards = Array.isArray(saved && saved.cards) ? saved.cards : (Array.isArray(legacy) ? legacy : []);
+    var previousProduct = saved ? null : safeParse(LEGACY_PRODUCT_KEY);
+    var legacy = saved || previousProduct ? null : safeParse(LEGACY_STORAGE_KEY);
+    var migrated = saved || previousProduct;
+    var savedCards = Array.isArray(migrated && migrated.cards) ? migrated.cards : (Array.isArray(legacy) ? legacy : []);
     var byHash = {};
     savedCards.forEach(function (card) {
       if (card && card.hash) byHash[card.hash] = card;
@@ -278,8 +281,8 @@
     state.cards = rawCards.map(function (raw, index) {
       return makeCard(raw, index, byHash[hashString(String(raw.q || raw.question || '') + String(raw.a || raw.answer || ''))]);
     }).filter(function (card) { return card.question || card.answer; });
-    state.history = Array.isArray(saved && saved.history) ? saved.history : [];
-    var settings = saved && saved.settings ? saved.settings : {};
+    state.history = Array.isArray(migrated && migrated.history) ? migrated.history : [];
+    var settings = migrated && migrated.settings ? migrated.settings : {};
     state.theme = settings.theme === 'dark' || settings.theme === 'light' ? settings.theme : (
       window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     );
@@ -523,16 +526,16 @@
       '<a class="skip-link" href="#main-content">Sari la conținut</a>' +
       '<div class="app-layout">' +
         '<aside class="sidebar" aria-label="Navigație principală">' +
-          '<div class="brand"><div class="brand-mark"><span class="brand-dot"></span><span>NF</span></div><div><div class="brand-kicker">UBB / NOBEL EDITION</div><div class="brand-name">Neural field</div><div class="brand-sub">laborator de studiu</div></div></div>' +
+          '<div class="brand"><div class="brand-mark"><span class="brand-dot"></span><span>NF</span></div><div><div class="brand-kicker">UBB CLUJ / ADMITERE</div><div class="brand-name">Neuroștiințe</div><div class="brand-sub">Psihologie · pregătire</div></div></div>' +
           '<div class="sidebar-rule"></div>' +
           '<nav class="nav-list">' + nav + '</nav>' +
           '<div class="sidebar-bottom"><div class="streak-mini"><span class="streak-orbit" aria-hidden="true">✦</span><div><strong>' + stats.streak + ' zile</strong><span>serie de studiu</span></div></div>' +
           '<div class="goal-mini">' + progressBar(Math.round((stats.todayReviews / stats.goal) * 100), 'Obiectiv zilnic') + '<span>' + stats.todayReviews + '/' + stats.goal + ' astăzi</span></div></div>' +
         '</aside>' +
         '<div class="app-column">' +
-          '<header class="topbar"><div class="mobile-brand"><span class="brand-dot"></span><strong>Neural field</strong></div><div class="topbar-meta"><span class="pulse"></span><span>memorie locală</span><span class="kbd">/</span><button type="button" class="icon-button" data-action="theme-toggle" aria-label="' + (state.theme === 'dark' ? 'Activează tema luminoasă' : 'Activează tema întunecată') + '" aria-pressed="' + (state.theme === 'dark' ? 'true' : 'false') + '">' + (state.theme === 'dark' ? '☼' : '☾') + '</button></div></header>' +
+          '<header class="topbar"><div class="mobile-brand"><span class="brand-dot"></span><strong>Neuroștiințe UBB</strong></div><div class="topbar-meta"><span class="pulse"></span><span>memorie locală</span><span class="kbd">/</span><button type="button" class="icon-button" data-action="theme-toggle" aria-label="' + (state.theme === 'dark' ? 'Activează tema luminoasă' : 'Activează tema întunecată') + '" aria-pressed="' + (state.theme === 'dark' ? 'true' : 'false') + '">' + (state.theme === 'dark' ? '☼' : '☾') + '</button></div></header>' +
           '<main id="main-content" class="main-content" tabindex="-1">' + storageNotice + renderView() + '</main>' +
-          '<footer class="app-footer">Instrument educațional pentru studiu individual · verifică răspunsurile cu materialul de curs; nu înlocuiește sfatul medical.</footer>' +
+          '<footer class="app-footer">Instrument independent pentru pregătirea admiterii la Psihologie la UBB Cluj · verifică răspunsurile cu materialul de curs; nu înlocuiește sfatul medical.</footer>' +
         '</div>' +
       '</div>' +
       '<div class="toast" aria-live="polite" aria-atomic="true">' + (state.toast ? esc(state.toast) : '') + '</div>' +
@@ -574,7 +577,7 @@
     }).join('');
     var primaryLabel = stats.due ? 'Începe repetarea (' + stats.due + ')' : 'Începe o sesiune';
     return '<section class="view dashboard-view">' +
-      '<div class="hero-grid"><div class="hero-copy"><p class="eyebrow">NOBEL EDITION · 812 DE CARDURI</p><h1>Păstrează întrebarea vie.</h1><p class="hero-lede">Un laborator personal pentru neuroștiințe: întrebi, îți amintești, verifici și revii exact când memoria are nevoie.</p><div class="hero-actions">' + button(primaryLabel, 'start-all-due', 'button-primary') + button('Explorează atlasul', 'navigate-atlas', 'button-secondary') + '</div><div class="hero-footnote"><span class="signal-mark">↳</span><span>Răspunsurile și progresul rămân în browserul tău.</span></div></div>' +
+      '<div class="hero-grid"><div class="hero-copy"><p class="eyebrow">ADMITERE PSIHOLOGIE UBB CLUJ · 812 DE CARDURI</p><h1>Pregătește-te pentru admitere.</h1><p class="hero-lede">Fișe de studiu pentru cei care se pregătesc pentru admiterea la Psihologie la UBB Cluj: îți amintești, verifici și revii exact când memoria are nevoie.</p><div class="hero-actions">' + button(primaryLabel, 'start-all-due', 'button-primary') + button('Explorează atlasul', 'navigate-atlas', 'button-secondary') + '</div><div class="hero-footnote"><span class="signal-mark">↳</span><span>Răspunsurile și progresul rămân în browserul tău.</span></div></div>' +
       '<div class="neural-panel"><div class="panel-label"><span>câmp neural</span><span>' + stats.mastered + '/' + stats.total + '</span></div><svg class="neural-map" viewBox="0 0 840 230" role="img" aria-label="Harta celor șase module și progresul lor">' + lines + moduleNodes + '<path class="neural-arc" d="M 60 188 C 250 215, 570 215, 790 178"></path></svg><div class="neural-legend"><span><i class="legend-dot legend-active"></i>progres</span><span><i class="legend-dot legend-rest"></i>următorul nod: ' + esc(getNextModuleName()) + '</span></div></div></div>' +
       '<div class="stat-strip"><div class="stat-cell"><span class="stat-label">de repetat</span><strong>' + stats.due + '</strong><span class="stat-note">astăzi</span></div><div class="stat-cell"><span class="stat-label">stăpânite</span><strong>' + stats.mastered + '</strong><span class="stat-note">din ' + stats.total + '</span></div><div class="stat-cell"><span class="stat-label">acuratețe</span><strong>' + (stats.reviewed ? stats.accuracy + '%' : '—') + '</strong><span class="stat-note">' + stats.reviewed + ' evaluări</span></div><div class="stat-cell"><span class="stat-label">serie</span><strong>' + stats.streak + '</strong><span class="stat-note">zile consecutive</span></div></div>' +
       '<div class="section-heading"><div><p class="eyebrow">TRASEUL TĂU</p><h2>Șase module, un singur circuit.</h2></div><button type="button" class="text-button" data-action="navigate" data-view="progress">Vezi raportul →</button></div>' +
@@ -971,7 +974,7 @@
   }
 
   function exportProgress() {
-    var payload = JSON.stringify({ exportedAt: now().toISOString(), app: 'Neuroștiințe UBB Nobel Edition', version: 1, cards: state.cards, history: state.history, settings: { theme: state.theme, dailyGoal: state.dailyGoal } }, null, 2);
+    var payload = JSON.stringify({ exportedAt: now().toISOString(), app: 'Neuroștiințe UBB — pregătire pentru admiterea la Psihologie', version: 1, cards: state.cards, history: state.history, settings: { theme: state.theme, dailyGoal: state.dailyGoal } }, null, 2);
     var blob = new Blob([payload], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
     var link = document.createElement('a');
@@ -1054,7 +1057,7 @@
     root.innerHTML = renderShell();
     bindEvents();
     var main = root.querySelector('#main-content');
-    if (main && state.view !== 'study') document.title = 'Neuroștiințe UBB — Nobel Edition';
+    if (main && state.view !== 'study') document.title = 'Neuroștiințe pentru admiterea la Psihologie UBB Cluj';
   }
 
   function syncThemeMeta() {
@@ -1108,7 +1111,7 @@
   }
 
   function injectStyles() {
-    if (document.getElementById('nobel-edition-styles')) return;
+    if (document.getElementById('neuro-app-styles')) return;
     var css = [
       ':root { color-scheme: light; --bg: #f4f0e7; --surface: #fffaf1; --surface-strong: #ffffff; --surface-muted: #e9e3d8; --ink: #122338; --muted: #415268; --faint: #394b5c; --line: #c8d0d0; --line-strong: #9fadb3; --coral: #7d241b; --coral-soft: #f0d8cf; --teal: #005455; --teal-soft: #cde8e3; --gold: #6a4300; --gold-soft: #fff0ca; --module-1: #4f439d; --module-2: #6b3fa0; --module-3: #8a2f6e; --module-4: #915a00; --module-5: #006653; --module-6: #006b7a; --shadow: 0 22px 60px rgba(21, 38, 55, .10); --shadow-small: 0 7px 24px rgba(21, 38, 55, .08); --on-accent: #fffaf1; --radius: 18px; --serif: Iowan Old Style, Baskerville, Georgia, serif; --sans: Avenir Next, Futura, Trebuchet MS, sans-serif; --mono: SFMono-Regular, Consolas, Liberation Mono, monospace; }',
       '[data-theme="dark"] { color-scheme: dark; --bg: #091522; --surface: #0e2032; --surface-strong: #142a40; --surface-muted: #19334a; --ink: #f3eee4; --muted: #c0cbd2; --faint: #b4c5cc; --line: #365068; --line-strong: #5b7488; --coral: #ffb0a6; --coral-soft: #2b1c23; --teal: #5bd2c8; --teal-soft: #0c2e30; --gold: #e8bd61; --gold-soft: #302715; --module-1: #b9b0ff; --module-2: #cf9eff; --module-3: #ff9ed8; --module-4: #f3c16b; --module-5: #72dfae; --module-6: #7bdff0; --shadow: 0 24px 64px rgba(0, 0, 0, .28); --shadow-small: 0 8px 24px rgba(0, 0, 0, .22); --on-accent: #081521; }',
@@ -1148,7 +1151,7 @@
       '@media (prefers-reduced-motion: reduce) { .app-shell *, .app-shell *::before, .app-shell *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }'
     ].join('\n');
     var style = document.createElement('style');
-    style.id = 'nobel-edition-styles';
+    style.id = 'neuro-app-styles';
     style.textContent = css;
     document.head.appendChild(style);
   }

@@ -1,8 +1,8 @@
-# Ghid de utilizare — Neuroștiințe UBB
+# Ghid de utilizare — neuroștiințe pentru admiterea la Psihologie UBB Cluj
 
 ## Pornire
 
-Deschide [aplicația live](https://mariuscomper.github.io/neuroscience-flashcards/) sau, local, `neurostiinte-improved.html`. Prima încărcare descarcă doar fișierele proiectului; aplicația nu folosește biblioteci externe. După prima încărcare într-un browser compatibil, service worker-ul poate păstra aplicația disponibilă offline.
+Deschide [aplicația live](https://mariuscomper.github.io/neuroscience-flashcards/) sau, local, `neurostiinte-improved.html`. Este un instrument independent pentru cei care se pregătesc pentru admiterea la Psihologie la UBB Cluj; nu este o aplicație oficială UBB. Prima încărcare descarcă doar fișierele proiectului; aplicația nu folosește biblioteci externe. După prima încărcare într-un browser compatibil, service worker-ul poate păstra aplicația disponibilă offline.
 
 ## Panoul
 

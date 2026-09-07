@@ -1,4 +1,4 @@
-# Funcționalități — Neuroștiințe UBB, Nobel Edition
+# Funcționalități — neuroștiințe pentru admiterea la Psihologie UBB Cluj
 
 Stare verificată la 7 septembrie 2026. Acest document separă funcțiile livrate de lucrurile lăsate intenționat pentru o versiune ulterioară.
 

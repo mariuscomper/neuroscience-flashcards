@@ -1,11 +1,11 @@
-# Plan de integrare — ce a fost livrat și ce urmează
+# Plan de integrare — pregătire pentru admiterea la Psihologie UBB Cluj
 
 ## Decizia de arhitectură
 
 Am ales o aplicație statică modulară, nu un fișier monolitic și nu un proiect dependent de CDN:
 
 - datele cardurilor sunt în `cards-data.js`;
-- runtime-ul este în `nobel-app.js`;
+- runtime-ul este în `neuro-app.js`;
 - `neurostiinte-improved.html` rămâne shell-ul public;
 - manifestul și service worker-ul asigură instalarea și cache-ul offline;
 - progresul rămâne în browser și poate fi exportat JSON.

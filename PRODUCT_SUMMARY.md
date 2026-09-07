@@ -1,8 +1,8 @@
-# Nobel Edition — rezumatul versiunii livrate
+# Rezumatul produsului — pregătire pentru admiterea la Psihologie UBB Cluj
 
 ## Stare
 
-La 7 septembrie 2026, Nobel Edition este implementată în `neurostiinte-improved.html` și publicată pe GitHub Pages. Denumirea este o convenție de produs pentru o versiune de studiu ambițioasă; nu este o certificare „la nivel Nobel” și nu validează științific automat conținutul sau performanța utilizatorului.
+La 7 septembrie 2026, aplicația este implementată în `neurostiinte-improved.html` și publicată pe GitHub Pages ca instrument independent pentru cei care se pregătesc pentru admiterea la Psihologie la UBB Cluj. Nu este un produs oficial UBB, nu garantează rezultatul la admitere și nu validează automat conținutul sau performanța utilizatorului.
 
 ## Ce a fost livrat
 
@@ -12,7 +12,7 @@ La 7 septembrie 2026, Nobel Edition este implementată în `neurostiinte-improve
 - simulator de examen cu cronometrul și rezultat pe module;
 - progres local cu serie, obiectiv, activitate și repere;
 - export/import, temă dublă, tastatură, responsive și PWA offline;
-- separarea datelor în `cards-data.js` și a runtime-ului în `nobel-app.js`, fără React, Babel, fonturi sau alte resurse CDN.
+- separarea datelor în `cards-data.js` și a runtime-ului în `neuro-app.js`, fără React, Babel, fonturi sau alte resurse CDN.
 
 ## Îmbunătățiri ale materialului
 
@@ -35,7 +35,7 @@ Aplicația este un site static:
 ```text
 neurostiinte-improved.html  — shell, metadate și punct de montare
 cards-data.js              — datele cardurilor
-nobel-app.js               — UI, stare, repetare, Atlas și examen
+neuro-app.js               — UI, stare, repetare, Atlas și examen
 manifest.webmanifest       — metadate de instalare
 sw.js                      — cache offline și actualizare
 ```

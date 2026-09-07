@@ -1,4 +1,4 @@
-# Documentație tehnică — Neuroștiințe UBB, Nobel Edition
+# Documentație tehnică — neuroștiințe pentru admiterea la Psihologie UBB Cluj
 
 ## Arhitectură efectivă
 
@@ -7,14 +7,14 @@ Aplicația este un site static fără proces de construire și fără dependenț
 ```text
 neurostiinte-improved.html
 ├── cards-data.js
-├── nobel-app.js
+├── neuro-app.js
 ├── manifest.webmanifest
 ├── sw.js
 ├── icon-192.svg
 └── icon-512.svg
 ```
 
-HTML-ul conține doar metadatele, punctul `#root` și scripturile locale. `cards-data.js` expune `window.NEURO_CARDS`, iar `nobel-app.js` construiește interfața și atașează evenimentele.
+HTML-ul conține doar metadatele, punctul `#root` și scripturile locale. `cards-data.js` expune `window.NEURO_CARDS`, iar `neuro-app.js` construiește interfața și atașează evenimentele.
 
 ## Modelul cardului
 
@@ -55,7 +55,7 @@ Cardurile scadente sunt cele cu `nextReview` mai mic sau egal cu momentul curent
 
 ## Starea locală
 
-Cheia principală este `neuro-nobel-v1` și conține:
+Cheia principală este `neuro-ubb-admitere-v1` și conține:
 
 ```javascript
 {
@@ -66,7 +66,7 @@ Cheia principală este `neuro-nobel-v1` și conține:
 }
 ```
 
-Runtime-ul încearcă să migreze progresul vechi din `neuro-improved-v2`. Dacă `localStorage` nu este disponibil, păstrează un fallback în memorie pentru sesiunea curentă și afișează un avertisment, astfel încât utilizatorul să poată exporta datele.
+Runtime-ul migrează progresul versiunii anterioare din `neuro-nobel-v1` sau `neuro-improved-v2`. Dacă `localStorage` nu este disponibil, păstrează un fallback în memorie pentru sesiunea curentă și afișează un avertisment, astfel încât utilizatorul să poată exporta datele.
 
 ## Interfață și accesibilitate
 
@@ -89,7 +89,7 @@ Service worker-ul este înregistrat numai pe HTTP(S), nu la deschiderea directă
 
 ```bash
 node --check cards-data.js
-node --check nobel-app.js
+node --check neuro-app.js
 node --check sw.js
 node -e "JSON.parse(require('fs').readFileSync('manifest.webmanifest','utf8'))"
 git diff --check

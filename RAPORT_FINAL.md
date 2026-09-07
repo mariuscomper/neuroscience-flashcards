@@ -1,8 +1,8 @@
-# 🎉 RAPORT FINAL - Carduri Neuroștiințe UBB
+# Raport final — carduri pentru admiterea la Psihologie UBB Cluj
 
 ## ✅ MISIUNE COMPLETĂ!
 
-Am adăugat **118 carduri noi** la cele 694 existente, rezultând un total de **812 carduri comprehensiveși**.
+Am pornit de la 694 de carduri și am adăugat 118; setul public are acum **812 de carduri**.
 
 ---
 
@@ -12,14 +12,14 @@ Am adăugat **118 carduri noi** la cele 694 existente, rezultând un total de **
 
 ### Distribuție pe Module:
 
-| Modul | Carduri Vechi | Carduri Noi | **Total** |
-|-------|---------------|-------------|-----------|
-| **M1** - Perspectivă istorică | 120 | +3 | **123** |
-| **M2** - Neuroni & Gliale | 117 | +18 | **135** |
-| **M3** - Semnalizare | 103 | +30 | **133** |
-| **M4** - Neuroanatomie | 142 | +14 | **156** |
-| **M5** - Dezvoltare SN | 93 | +24 | **117** |
-| **M6** - Văzul | 119 | +27 | **146** |
+| Modul | **Total** |
+|-------|----------:|
+| **M1** — Perspectivă istorică | **123** |
+| **M2** — Neuroni și celule gliale | **135** |
+| **M3** — Semnalizare sinaptică | **133** |
+| **M4** — Neuroanatomie | **157** |
+| **M5** — Dezvoltarea sistemului nervos | **118** |
+| **M6** — Văzul | **146** |
 
 ---
 
