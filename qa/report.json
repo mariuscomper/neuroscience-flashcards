@@ -1,7 +1,7 @@
 {
   "$schema": "../../standards/v2/qa-report.schema.json",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T00:56:56Z",
+  "generatedAt": "2026-09-07T01:00:06Z",
   "target": "https://mariuscomper.github.io/neuroscience-flashcards/",
   "overallStatus": "blocked",
   "checks": [
@@ -75,7 +75,7 @@
       "id": "closeout",
       "module": "core",
       "status": "pass",
-      "evidence": "Implementarea este publicată în commitul a87562e; README-ul, ghidul, lista funcționalităților, planul, documentația tehnică și rezumatul produsului au fost sincronizate cu starea reală. Captura mobilă rămâne explicit închisă ca verificare restantă."
+      "evidence": "Implementarea funcțională este publicată în commitul a87562e, iar rebrandingul pentru admiterea la Psihologie UBB Cluj în f94bac4; README-ul, ghidul, lista funcționalităților, planul, documentația tehnică și rezumatul produsului sunt sincronizate cu starea reală. Captura mobilă rămâne explicit închisă ca verificare restantă."
     }
   ],
   "finalCaptures": []
