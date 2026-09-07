@@ -1,0 +1,82 @@
+{
+  "$schema": "../../standards/v2/qa-report.schema.json",
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T00:29:02Z",
+  "target": "https://mariuscomper.github.io/neuroscience-flashcards/",
+  "overallStatus": "blocked",
+  "checks": [
+    {
+      "id": "scope-and-reader-value",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Versiunea livrată transformă setul existent într-un laborator de studiu: reamintire activă, repetare spațiată, Atlas, examen și progres local, cu delimitarea clară a limitelor educaționale."
+    },
+    {
+      "id": "sources-and-claims",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Nu au fost adăugate afirmații științifice externe ca rezultate noi; au fost verificate integritatea setului, apartenența la module, duplicatele și corecțiile editoriale evidente. Verificarea de specialitate a tuturor celor 812 de afirmații rămâne o limită documentată, nu este prezentată ca fiind făcută."
+    },
+    {
+      "id": "production-build",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Site static fără build: node --check a trecut pentru cards-data.js, nobel-app.js și sw.js; manifestul este JSON valid; git diff --check a trecut."
+    },
+    {
+      "id": "delivered-content",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Setul conține 812 de carduri și 812 de întrebări unice în șase module; browser QA a confirmat cinci moduri, șase diagrame, 12 noduri conceptuale, 12 mnemonice, examen și progres."
+    },
+    {
+      "id": "accessibility",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Au fost verificate în browser nume accesibile, focus vizibil, linkul de salt, navigarea principală, butoanele de mod, câmpurile de căutare și controalele de temă; CSS-ul include prefers-reduced-motion și contrast semantic pentru temele Light/Dark."
+    },
+    {
+      "id": "resilience",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Datele și runtime-ul sunt locale, localStorage are fallback în memorie, service worker-ul are cache-first pentru shell, iar toate activele PWA au răspuns HTTP 200 live. Comutarea offline în browser nu a fost simulată separat."
+    },
+    {
+      "id": "mobile-visual",
+      "module": "core",
+      "status": "blocked",
+      "evidence": "Regulile responsive și breakpoints au fost revizuite, însă captura live la 390 de pixeli nu a putut fi făcută deoarece sesiunea CUA nu a oferit control de viewport."
+    },
+    {
+      "id": "desktop-visual",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Au fost inspectate vizual ecrane desktop pentru dashboard, Atlas, studiu, examen și tema întunecată; ierarhia, harta neuronală, cardurile și contrastele sunt coerente."
+    },
+    {
+      "id": "metadata-and-assets",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Descrierea, theme-color, color-scheme, manifestul și pictogramele sunt locale; HTML-ul live, JavaScript-ul, manifestul, service worker-ul și SVG-urile au răspuns cu 200 și tipurile de conținut așteptate."
+    },
+    {
+      "id": "release-target",
+      "module": "core",
+      "status": "not-applicable",
+      "evidence": "Remedierea a păstrat originea GitHub Pages existentă a repository-ului. Migrarea proiectelor publice către rutele canonice Cloudflare este o lucrare separată și nu a fost simulată ca fiind realizată aici."
+    },
+    {
+      "id": "live-behavior",
+      "module": "core",
+      "status": "pass",
+      "evidence": "QA live a exercitat căutarea hipocampului, selectarea unui nod de diagramă, dezvăluirea și evaluarea unui card, modurile completare și grilă, examenul de 10 întrebări și tema întunecată; pagina standalone nu a generat erori noi în fluxurile curente."
+    },
+    {
+      "id": "closeout",
+      "module": "core",
+      "status": "pass",
+      "evidence": "Implementarea este publicată în commitul a87562e; README-ul, ghidul, lista funcționalităților, planul, documentația tehnică și rezumatul Nobel Edition au fost sincronizate cu starea reală. Captura mobilă rămâne explicit închisă ca verificare restantă."
+    }
+  ],
+  "finalCaptures": []
+}

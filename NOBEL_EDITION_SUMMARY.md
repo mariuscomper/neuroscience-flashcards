@@ -26,6 +26,8 @@ La 7 septembrie 2026, Nobel Edition este implementată în `neurostiinte-improve
 
 Aceste corecții nu reprezintă o revizie de specialitate a tuturor celor 812 de afirmații; pentru aceasta rămâne necesară verificarea cu materialul didactic și literatura de specialitate.
 
+Dovezile de verificare sunt consemnate în [raportul QA](qa/report.json). Acesta marchează explicit ca restantă doar captura vizuală live la 390 de pixeli, deoarece controlul de viewport nu a fost disponibil în sesiunea de lucru.
+
 ## Arhitectură
 
 Aplicația este un site static:

@@ -33,4 +33,4 @@ Acestea rămân backlog explicit, nu promisiuni ascunse în interfața actuală.
 
 ## Principii
 
-Aplicația păstrează datele local, folosește HTML/CSS/JavaScript fără dependințe de rețea și nu prezintă rezultatul examenului drept evaluare academică sau medicală. Conținutul este un material de studiu și trebuie confruntat cu sursa de curs.
+Aplicația păstrează datele local, folosește HTML/CSS/JavaScript fără dependențe de rețea și nu prezintă rezultatul examenului drept evaluare academică sau medicală. Conținutul este un material de studiu și trebuie confruntat cu sursa de curs.

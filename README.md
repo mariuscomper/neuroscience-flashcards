@@ -59,6 +59,7 @@ Comanda `/` duce la căutare, iar bara de spațiu afișează răspunsul în modu
 - [Planul livrat și backlogul](INTEGRATION_PLAN.md)
 - [Rezumatul Nobel Edition](NOBEL_EDITION_SUMMARY.md)
 - [Raportul celor 812 carduri](RAPORT_FINAL.md)
+- [Raportul QA](qa/report.json)
 
 ## Limite asumate
 
