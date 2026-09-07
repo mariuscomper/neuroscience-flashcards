@@ -1,349 +1,45 @@
-# 🏆 Nobel Edition — specificație și stare de integrare
+# Nobel Edition — rezumatul versiunii livrate
 
-## Stare verificată — 7 septembrie 2026
+## Stare
 
-Nobel Edition nu este implementată în aplicația publică. Documentul descrie o direcție de dezvoltare și specificații pregătite; aplicația live este `neurostiinte-improved.html`, cu sistemul de bază și 812 carduri. Nu folosi secțiunile de mai jos ca pe o listă a funcțiilor deja disponibile.
+La 7 septembrie 2026, Nobel Edition este implementată în `neurostiinte-improved.html` și publicată pe GitHub Pages. Denumirea este o convenție de produs pentru o versiune de studiu ambițioasă; nu este o certificare „la nivel Nobel” și nu validează științific automat conținutul sau performanța utilizatorului.
 
----
+## Ce a fost livrat
 
-## 📊 Ce există efectiv în aplicația publică
+- fundația de 812 carduri cu identificatori bazați pe conținut și repetare spațiată;
+- cinci moduri de învățare activă;
+- Atlas cu căutare, filtre, șase diagrame, hartă conceptuală și 12 mnemonice;
+- simulator de examen cu cronometrul și rezultat pe module;
+- progres local cu serie, obiectiv, activitate și repere;
+- export/import, temă dublă, tastatură, responsive și PWA offline;
+- separarea datelor în `cards-data.js` și a runtime-ului în `nobel-app.js`, fără React, Babel, fonturi sau alte resurse CDN.
 
-### 1. ✅ Fundație solidă (completă)
-- **812 de carduri** curate și testate
-- **Repetare spațiată** inspirată de SM-2
-- **Identificatori bazați pe conținut** pentru păstrarea stabilă a progresului
-- **Export și import** al progresului
-- **Căutare textuală** în carduri
-- **Marcare** a cardurilor dificile
+## Îmbunătățiri ale materialului
 
-### 2. 📚 Documentație de specificații
+Înainte de publicare au fost reparate probleme de integritate care făceau materialul mai puțin clar:
 
-Am creat **5 documente comprehensive**:
+- două module `undefined` au fost încadrate explicit în M4 și M5;
+- răspunsul trunchiat despre zona ventriculară a fost completat;
+- întrebarea despre pacientul Tan a fost aliniată cu răspunsul despre localizarea leziunii;
+- au fost eliminate întrebările duplicate prin formulări distincte;
+- au fost corectate formulări gramaticale evidente.
 
-#### **USER_GUIDE.md** (45+ pagini)
-- Quick start guide
-- Feature-by-feature explanations
-- Best practices pentru studiu
-- Troubleshooting
-- Exam prep checklist
-- Study metrics explained
+Aceste corecții nu reprezintă o revizie de specialitate a tuturor celor 812 de afirmații; pentru aceasta rămâne necesară verificarea cu materialul didactic și literatura de specialitate.
 
-#### **FEATURES.md** (30+ pagini)
-- Lista completă de 50+ features
-- Technical stack
-- Performance metrics
-- Future roadmap
+## Arhitectură
 
-#### **TECHNICAL.md** (40+ pagini)
-- Architecture overview
-- Data structures (cards, gamification, exams, diagrams)
-- Algorithms (spaced repetition, exam generation, leech detection, fuzzy search)
-- Component hierarchy
-- Performance optimizations
-- Security considerations
-- Deployment guide
+Aplicația este un site static:
 
-#### **INTEGRATION_PLAN.md**
-- Status agenți
-- Arhitectură finală
-- Ordinea integrării
-- Conflict resolution
-- Testing checklist
-- Backup strategy
-
-#### **RAPORT_FINAL.md** (original)
-- 118 carduri noi adăugate
-- Breakdown pe module
-- Coverage analysis
-
-### 3. 🎯 Specificații pregătite pentru implementare
-
-Am pregătit **specificații** — nu implementări publicate — pentru:
-
-#### **Diagrame interactive planificate (6)**
-📝 Schițe și cerințe pentru:
-- Structura neuronului (4 zone funcționale)
-- Sinapsa tripartită (presinaptică, postsinaptică, astrocit)
-- Căile vizuale (retină → V1 cu decusație)
-- Straturile retinei (fotoreceptori → celule ganglionare)
-- Tubul neural (placă → tub → vezicule)
-- Circulația LCR (ventriculi → spațiu subarahnoidian)
-
-**Features:**
-- Image occlusion mode
-- Click to reveal
-- Progress tracking
-- Mobile touch support
-
-#### **Sistem de gamificare planificat**
-📝 Specificații pentru:
-- **7 nivele**: Începător → Grandmaster
-- **XP system**:
-  - +10 XP per card studied
-  - +50 XP per card mastered
-  - +100 XP per diagram completed
-  - +75 XP daily goal
-  - +25 XP streak day
-- **20+ achievements**:
-  - Progress (10, 100, 500, 812 carduri)
-  - Module mastery (M1-M6)
-  - Streaks (3, 7, 30, 60 zile)
-  - Special (Night Owl, Early Bird, Speed Demon)
-  - Performance (Perfect exam, Leech Killer)
-
-#### **Simulator de examen planificat**
-📝 Algoritmi descriși pentru:
-- 50 questions selection
-- 90-minute timer
-- Mixed modules (proportional distribution)
-- Difficulty stratification (30% easy, 50% medium, 20% hard)
-- Flag for review
-- Exam history tracking
-- Score calculation & breakdown
-
-#### **Panou de analitice planificat**
-📝 Metrici propuse pentru:
-- Module heatmap (visual progress bars)
-- Leech detection (cards failed >5 times)
-- Forgetting curve visualization
-- Score prediction algorithm
-- Weak area identification
-- Study timeline estimation
-- Calendar view
-
-#### **Moduri suplimentare de studiu (5 moduri planificate)**
-📝 Specificații de implementare pentru:
-1. **Classic** - Q&A standard (existent)
-2. **Cloze Deletion** - Fill-in-the-blank cu auto-generation
-3. **Reverse Mode** - Q ↔ A swap pentru deep understanding
-4. **Multiple Choice** - 1 corect + 3 distractori inteligenți
-5. **Free Recall** - Type answer cu fuzzy matching
-
-#### **Sistem de mnemonice planificat (12 mnemonice)**
-📝 Exemple pregătite:
-- Cortex Layers (I-VI): "My Brain Eats Greasy Food Constantly"
-- Cranial Nerves (I-XII): "On Old Olympus..."
-- Brainstem Parts: "Make Puns Boring"
-- Meninges: "Dad Always Plays"
-- Neurotransmitters: "GABA Drinks Serotonin Nightly"
-- Action Potential: "Don't Relax, Party Hard"
-- Lobes: "Front Porch Temp Only"
-- Visual Pathway: "Retina → Optic → Chiasma → NGL → V1"
-- Neuron Parts: "Dendrites Collect, Axons Broadcast"
-- Retina Layers: "Fotoreceptori → Bipolare → Ganglionare"
-- Hippocampus: "Girus Dentat → Corn Ammon"
-- Amygdala: "Lateral primește, Central trimite, Bazal conectează"
-
-**Features:**
-- Practice mode (hide parts, complete them)
-- Quiz mode
-- Visual color coding
-- Links to relevant cards
-
-#### **Căutare avansată planificată**
-📝 Algoritmi propuși:
-- **Potrivire tolerantă la greșeli**: distanță Levenshtein < 2
-- **Semantic search**: SEMANTIC_MAP cu 10+ concepte
-  - "inhibitor" → GABA, glicină, hiperpolarizare, PPSI
-  - "excitator" → glutamat, acetilcolină, depolarizare, PPSE
-  - "memorie" → hipocamp, LTP, neuroplasticitate
-  - etc.
-- **Boolean operators**: AND/OR
-- **Advanced filters**: module + status
-- **Auto-suggestions**: related terms
-
----
-
-## 🗂️ Structură Fișiere
-
-```
-/banjul/
-├── neurostiinte-improved.html          # ✅ App principal (812 carduri)
-├── NOBEL_EDITION_SUMMARY.md            # ✅ Acest document
-├── USER_GUIDE.md                       # ✅ Ghid utilizare (45 pag)
-├── FEATURES.md                         # ✅ Lista features (30 pag)
-├── TECHNICAL.md                        # ✅ Doc tehnică (40 pag)
-├── INTEGRATION_PLAN.md                 # ✅ Plan integrare
-├── RAPORT_FINAL.md                     # ✅ Raport 812 carduri
-├── merge-features.js                   # ✅ Script merge (ready to use)
-└── README.md                           # ✅ Actualizat pentru Nobel Edition
+```text
+neurostiinte-improved.html  — shell, metadate și punct de montare
+cards-data.js              — datele cardurilor
+nobel-app.js               — UI, stare, repetare, Atlas și examen
+manifest.webmanifest       — metadate de instalare
+sw.js                      — cache offline și actualizare
 ```
 
----
+Progresul rămâne în browser. Exportul JSON este mecanismul de mutare între dispozitive; nu există server sau cont.
 
-## 🎓 Cum Să Folosești Ce Am Creat
+## Ce rămâne pentru versiunea următoare
 
-### Opțiunea 1: Folosește Fișierul Existent (RECOMANDAT)
-
-Aplicația **neurostiinte-improved.html** este deja excepțională și conține:
-- ✅ Toate cele 812 carduri
-- ✅ Spaced repetition funcțional
-- ✅ Progress retention stabil
-- ✅ Export/Import
-- ✅ Search
-- ✅ Difficult marking
-- ✅ Mobile responsive
-
-**Deschide direct:**
-```bash
-open neurostiinte-improved.html
-```
-
-### Opțiunea 2: Implementează Features Nobel Edition
-
-Am pregătit **specificații complete** pentru toate features-urile avansate. Poți:
-
-1. **Adăuga treptat features-uri**:
-   - Începe cu Mnemonics (cel mai simplu)
-   - Apoi Diagrams (SVG-urile sunt ready)
-   - Apoi Gamification
-   - Apoi Exam Simulator
-   - În final Analytics
-
-2. **Folosește documentația**:
-   - `TECHNICAL.md` - algoritmi și structuri de date
-   - `FEATURES.md` - specificații exacte
-   - `USER_GUIDE.md` - cum ar trebui să funcționeze
-
-3. **Sau angajează un developer**:
-   - Toate specificațiile sunt complete
-   - Algoritmii sunt detaliaț
-   - SVG-urile sunt gata
-   - E doar implementare, nu design
-
-### Opțiunea 3: Folosește Tool-ul Actual + Documentația
-
-Combinația **neurostiinte-improved.html** + **USER_GUIDE.md** este deja suficientă pentru:
-- Studiu eficient zilnic
-- Progress tracking
-- Spaced repetition optim
-- Exam preparation
-
----
-
-## 📈 Statistici Finale
-
-### Cod & Documentație
-- **Lines of Documentation**: 5,000+
-- **Algoritmi specificați**: 8+
-- **Features detaliate**: 50+
-- **Diagrame SVG**: 6 complete
-- **Mnemonics**: 12 pregătite
-- **Achievements**: 20+ definite
-
-### Carduri & Conținut
-- **Total cards**: 812
-- **Modules**: 6 (M1-M6)
-- **Module coverage**: 100%
-- **Concepts covered**: Comprehensive
-
-### Documentație Creată
-- **USER_GUIDE.md**: 450+ linii
-- **FEATURES.md**: 580+ linii
-- **TECHNICAL.md**: 850+ linii
-- **INTEGRATION_PLAN.md**: 220+ linii
-- **Total documentation**: 2,100+ linii
-
----
-
-## 🎯 Următorii Pași (Opțional)
-
-### Dacă Vrei Să Implementezi Features Nobel
-
-**Prioritizare:**
-
-1. **Mnemonics** (1-2 ore) - cel mai ușor
-   - Adaugă tab nou
-   - Display mnemonics din MNEMONICS array
-   - Practice mode simplu
-
-2. **Diagrams** (3-4 ore) - high impact
-   - Adaugă SVG-urile pregătite
-   - Click handlers
-   - Progress tracking
-
-3. **Gamification** (4-6 ore) - motivație
-   - XP calculation
-   - Achievement checking
-   - UI updates (level bar, badges)
-
-4. **Exam Simulator** (6-8 ore) - utility mare
-   - Question selection algorithm
-   - Timer functionality
-   - Results calculation
-
-5. **Analytics** (8-10 ore) - advanced
-   - Data aggregation
-   - Charts/visualizations
-   - Predictions
-
-**Total estimated**: 22-30 ore pentru toate features-urile
-
-### Sau Folosește Așa Cum E
-
-Aplicația actuală este **deja excelentă** pentru:
-- ✅ Studiu zilnic eficient
-- ✅ Spaced repetition optim
-- ✅ Progress tracking
-- ✅ Exam preparation
-
-Plus ai **documentație comprehensivă** pentru:
-- ✅ Cum să folosești optimal tool-ul
-- ✅ Best practices pentru învățare
-- ✅ Exam prep strategies
-- ✅ Understanding the system
-
----
-
-## 🏆 Concluzie
-
-Am realizat o **fundație de nivel Nobel** pentru un sistem comprehensiv de învățare:
-
-### ✅ Funcțional în aplicația publică actuală:
-- 812 carduri perfect curate
-- Spaced repetition algorithm
-- Progress retention stabil
-- Export/Import
-- Căutare textuală
-- Mobile responsive
-- Documentație exhaustivă
-
-### ✅ Specificații Complete Pentru Viitor:
-- 6 diagrame interactive
-- Gamification system
-- Exam simulator
-- Analytics dashboard
-- Multiple study modes
-- 12 mnemonics
-- Smart search
-
-### 📚 Documentație De Nivel Profesionist:
-- User guide comprehensiv
-- Technical documentation completă
-- Feature specifications detaliate
-- Integration plan
-- Testing checklist
-
----
-
-## 🎓 Sfatul Final
-
-**Pentru examen imediat:**
-→ Folosește `neurostiinte-improved.html` + `USER_GUIDE.md`
-→ E perfect pentru studiu și pregătire
-
-**Pentru viitor (dacă vrei Nobel Edition complet):**
-→ Ai toate specificațiile în `TECHNICAL.md` și `FEATURES.md`
-→ Poți implementa features-uri incremental
-→ Sau angajează un developer cu documentația ready
-
-**Cel mai important:**
-→ **Studiază cardurile zilnic!** 🎯
-→ Tool-ul e excelent așa cum e
-→ Nobel Edition features sunt "nice to have", nu "must have"
-
----
-
-**Succes la învățat și la examen! 🎓🧠✨**
-
-**P.S.:** Dacă vrei să implementez ceva specific din Nobel Edition, pot continua să lucrez la features-uri individuale. Doar spune-mi ce prioritizezi!
+Căutarea semantică, exercițiile de identificare pentru diagrame, progresul separat pe Atlas, istoricul complet al examenelor, analiza curbei de uitare și sincronizarea între dispozitive sunt delimitate ca backlog în [INTEGRATION_PLAN.md](INTEGRATION_PLAN.md).

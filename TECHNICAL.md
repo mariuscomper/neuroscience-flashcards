@@ -1,618 +1,102 @@
-# Documentație tehnică — Neuroștiințe UBB și Nobel Edition
+# Documentație tehnică — Neuroștiințe UBB, Nobel Edition
 
-> Stare verificată la 7 septembrie 2026: `neurostiinte-improved.html` este aplicația publică actuală și conține sistemul de bază cu 812 carduri. Referințele la `neurostiinte-nobel-edition.html`, D3.js, IndexedDB, service worker, PWA și funcțiile avansate de mai jos descriu o arhitectură propusă, nu funcții livrate.
+## Arhitectură efectivă
 
-## Architecture Overview
+Aplicația este un site static fără proces de construire și fără dependențe externe:
 
-### Technology Stack
-
-- **Interfață actuală**: React 18.2.0, ReactDOM și Babel Standalone (prin CDN)
-- **Vizualizare actuală**: interfața de studiu; D3.js pentru graf este doar propus
-- **Stocare actuală**: localStorage; IndexedDB este doar propus
-- **Service worker**: absent în aplicația publică actuală
-- **Construire**: nu există proces local; aplicația este un singur fișier HTML cu JavaScript inclus
-- **Publicare verificată**: GitHub Pages la `https://mariuscomper.github.io/neuroscience-flashcards/`
-
-### File Structure
-
-```
-neurostiinte-improved.html        # Aplicația publică actuală (812 carduri)
-├── HTML Structure
-├── Embedded CSS (inline styles)
-├── React Components (Babel-transpiled JSX)
-├── Data Structures (NEURO_CARDS array și starea progresului)
-├── Algorithms (repetare spațiată și căutare textuală)
-└── Funcții Nobel Edition propuse (nu sunt integrate în acest fișier)
+```text
+neurostiinte-improved.html
+├── cards-data.js
+├── nobel-app.js
+├── manifest.webmanifest
+├── sw.js
+├── icon-192.svg
+└── icon-512.svg
 ```
 
----
+HTML-ul conține doar metadatele, punctul `#root` și scripturile locale. `cards-data.js` expune `window.NEURO_CARDS`, iar `nobel-app.js` construiește interfața și atașează evenimentele.
 
-## Data Structures
+## Modelul cardului
 
-### 1. Cards Structure
-
-```javascript
-// Main card object
-{
-  id: "card-123",                    // Index-based ID
-  hash: "2k8j9f",                    // Content-based hash (SHA-like)
-  question: "Ce e glutamatul?",      // Question text
-  answer: "Principal NT excitator",  // Answer text
-  module: "M3",                      // Module ID (M1-M6)
-
-  // Spaced repetition data
-  interval: 7,                       // Days until next review
-  easeFactor: 2.5,                   // Difficulty multiplier (1.3 - 2.5)
-  repetitions: 3,                    // Successful repetitions count
-  nextReview: "2025-01-05T10:00:00Z", // ISO date of next review
-  lastReview: "2024-12-30T10:00:00Z", // ISO date of last review
-
-  // User annotations
-  isDifficult: false,                // Manual difficulty flag
-
-  // Optional metadata (for some cards)
-  ref: {
-    page: "47-48",                   // Manual page reference
-    figure: "3.5",                   // Figure number
-    citation: "Purves et al. (2012)" // Citation
-  }
-}
-```
-
-### 2. Gamification State
+Datele sursă folosesc `q`, `a` și `m`. Runtime-ul normalizează fiecare card la:
 
 ```javascript
 {
-  // Level & XP
-  level: 3,                          // Current level (1-7)
-  xp: 1250,                          // Total XP earned
-  xpForNextLevel: 1500,              // XP needed for next level
-
-  // Achievements
-  achievements: [
-    {
-      id: "first-10",
-      unlockedAt: "2024-12-25T12:00:00Z",
-      seen: true                     // User has seen unlock notification
-    },
-    // ... more achievements
-  ],
-
-  // Streaks
-  currentStreak: 7,                  // Days studied consecutively
-  longestStreak: 14,                 // Best streak ever
-  lastStudyDate: "2024-12-30",       // ISO date (for streak calculation)
-  studyCalendar: {                   // Map of dates studied
-    "2024-12-24": true,
-    "2024-12-25": true,
-    // ...
-  },
-
-  // Daily goals
-  dailyGoal: 20,                     // Cards to study per day
-  dailyProgress: 15,                 // Cards studied today
-  dailyGoalLastReset: "2024-12-30"   // Date for daily reset
+  id: "card-<hash>-<index>",
+  hash: "<hash al întrebării și răspunsului>",
+  question: "...",
+  answer: "...",
+  module: "M1" | "M2" | "M3" | "M4" | "M5" | "M6",
+  interval: 0,
+  easeFactor: 2.5,
+  repetitions: 0,
+  reviews: 0,
+  correct: 0,
+  nextReview: "<ISO date>",
+  lastReview: null,
+  isDifficult: false
 }
 ```
 
-### 3. Exam History
+Progresul este asociat prin hash-ul conținutului. Astfel, o corectură de text nu mută automat progresul pe alt card.
+
+## Repetare spațiată
+
+Evaluările sunt mapate astfel:
+
+- 1 — nu știam;
+- 3 — greu;
+- 4 — bine;
+- 5 — ușor.
+
+Evaluările sub 3 resetează repetițiile și readuc cardul la o revenire apropiată. Evaluările reușite cresc intervalul: prima revenire este scurtă, apoi intervalul este multiplicat cu factorul de ușurință. Factorul are o limită inferioară pentru a evita intervale nerezonabil de mici.
+
+Cardurile scadente sunt cele cu `nextReview` mai mic sau egal cu momentul curent. Obiectivul zilnic, seria și activitatea sunt derivate din istoricul local.
+
+## Starea locală
+
+Cheia principală este `neuro-nobel-v1` și conține:
 
 ```javascript
 {
-  examId: "exam-1735574400000",      // Timestamp-based ID
-  timestamp: "2024-12-30T15:00:00Z", // When exam was taken
-
-  questions: [                       // All 50 questions
-    {
-      cardHash: "2k8j9f",
-      question: "...",
-      correctAnswer: "...",
-      userAnswer: "...",
-      isCorrect: true,
-      timeTaken: 45                  // Seconds spent on question
-    },
-    // ... 49 more
-  ],
-
-  score: 85,                         // Total score (0-100)
-  scoreByModule: {                   // Breakdown per module
-    M1: 90,
-    M2: 80,
-    M3: 85,
-    M4: 88,
-    M5: 78,
-    M6: 92
-  },
-
-  timeElapsed: 4200,                 // Total seconds (70 minutes)
-  flaggedQuestions: [3, 15, 42]      // Question indices flagged for review
+  version: 1,
+  cards: [...],
+  history: [{ type: "review" | "exam", at: "...", ... }],
+  settings: { theme: "light" | "dark", dailyGoal: 20 }
 }
 ```
 
-### 4. Diagrams Progress
+Runtime-ul încearcă să migreze progresul vechi din `neuro-improved-v2`. Dacă `localStorage` nu este disponibil, păstrează un fallback în memorie pentru sesiunea curentă și afișează un avertisment, astfel încât utilizatorul să poată exporta datele.
 
-```javascript
-{
-  "neuron-structure": {
-    attempts: 15,                    // Total attempts
-    correctIdentifications: 12,      // Correct answers
-    lastAttempt: "2024-12-30T10:00:00Z",
-    mastered: false                  // true if >90% accuracy
-  },
-  "tripartite-synapse": {
-    attempts: 8,
-    correctIdentifications: 7,
-    lastAttempt: "2024-12-29T14:00:00Z",
-    mastered: false
-  },
-  // ... 4 more diagrams
-}
-```
+## Interfață și accesibilitate
 
-### 5. Knowledge Graph Structure
+CSS-ul este injectat local și folosește variabile semantice pentru suprafețe, text, accente și borduri. Există teme luminoasă și întunecată, focus vizibil, link de salt la conținut, etichete pentru barele de progres, controale cu nume accesibil și regulă `prefers-reduced-motion`.
 
-```javascript
-{
-  nodes: [
-    {
-      id: "gradient-electrochimic",
-      label: "Gradient Electrochimic",
-      module: "M3",
-      cardHashes: ["2k8j9f", "9hj3k2"], // Associated cards
-      type: "concept"                    // concept | process | structure
-    },
-    // ... 100+ nodes
-  ],
+Valorile cromatice au fost alese și verificate pentru contrastul textului normal în combinațiile principale de suprafață și accent. Stilurile nu folosesc culori hardcodate în atribute `style`; atributele inline rămase controlează numai dimensiuni numerice de progres.
 
-  edges: [
-    {
-      from: "gradient-electrochimic",
-      to: "potential-repaus",
-      type: "prerequisite"               // prerequisite | related | part-of
-    },
-    // ... 150+ edges
-  ]
-}
-```
+## PWA și offline
 
----
+`manifest.webmanifest` descrie aplicația instalabilă, iar `sw.js`:
 
-## Algorithms
+1. pune în cache shell-ul, datele, runtime-ul, manifestul și pictogramele;
+2. activează imediat noul worker;
+3. elimină cache-urile vechi;
+4. folosește cache-first pentru fișierele deja vizitate și încearcă rețeaua pentru cele noi.
 
-### 1. Spaced Repetition (SM-2 Inspired)
+Service worker-ul este înregistrat numai pe HTTP(S), nu la deschiderea directă prin `file://`.
 
-```javascript
-function updateCard(card, rating) {
-  if (rating < 3) {
-    // Failed - reset progress
-    card.repetitions = 0;
-    card.interval = 0;
-    card.nextReview = new Date(); // Due immediately
-  } else {
-    // Passed - increase interval
-    card.repetitions += 1;
+## Verificare locală
 
-    if (card.repetitions === 1) {
-      card.interval = 1; // 1 day
-    } else if (card.repetitions === 2) {
-      card.interval = 6; // 6 days
-    } else {
-      card.interval = Math.round(card.interval * card.easeFactor);
-    }
-
-    // Adjust ease factor
-    card.easeFactor += (0.1 - (5 - rating) * (0.08 + (5 - rating) * 0.02));
-    card.easeFactor = Math.max(1.3, Math.min(2.5, card.easeFactor));
-
-    // Calculate next review date
-    card.nextReview = new Date(Date.now() + card.interval * 24 * 60 * 60 * 1000);
-  }
-
-  card.lastReview = new Date();
-  return card;
-}
-```
-
-**Key Parameters:**
-- `rating`: 0-5 (user's self-assessment)
-- `easeFactor`: 1.3-2.5 (difficulty multiplier)
-- `interval`: Days until next review
-- `repetitions`: Successful repetitions count
-
-**Mastery Criteria:**
-- Card is "mastered" when `repetitions >= 3`
-
-###  2. Exam Question Selection
-
-```javascript
-function generateExam(cards, count = 50) {
-  // Filter: only cards that have been reviewed at least once
-  const eligibleCards = cards.filter(c => c.repetitions > 0);
-
-  // Calculate module distribution (proportional to module size)
-  const moduleDistribution = calculateProportionalDistribution(eligibleCards);
-
-  // Select cards per module
-  const selectedCards = [];
-
-  for (const [module, count] of Object.entries(moduleDistribution)) {
-    const moduleCards = eligibleCards.filter(c => c.module === module);
-
-    // Stratify by difficulty
-    const easy = moduleCards.filter(c => c.repetitions >= 3); // Mastered
-    const medium = moduleCards.filter(c => c.repetitions === 1-2); // Learning
-    const hard = moduleCards.filter(c => c.isDifficult || c.repetitions === 0); // Difficult
-
-    // Select: 30% easy, 50% medium, 20% hard
-    const easyCount = Math.round(count * 0.3);
-    const mediumCount = Math.round(count * 0.5);
-    const hardCount = count - easyCount - mediumCount;
-
-    selectedCards.push(...randomSample(easy, easyCount));
-    selectedCards.push(...randomSample(medium, mediumCount));
-    selectedCards.push(...randomSample(hard, hardCount));
-  }
-
-  // Shuffle to mix modules
-  return shuffle(selectedCards).slice(0, count);
-}
-```
-
-### 3. Score Prediction Algorithm
-
-```javascript
-function predictExamScore(cards) {
-  const totalCards = cards.length;
-  const mastered = cards.filter(c => c.repetitions >= 3).length;
-  const learning = cards.filter(c => c.repetitions > 0 && c.repetitions < 3).length;
-  const unseen = cards.filter(c => c.repetitions === 0).length;
-
-  // Weighted scoring
-  const score = (
-    (mastered / totalCards) * 100 * 0.9 +  // 90% accuracy on mastered
-    (learning / totalCards) * 100 * 0.6 +  // 60% accuracy on learning
-    (unseen / totalCards) * 100 * 0.2      // 20% accuracy on unseen (guessing)
-  );
-
-  // Calculate confidence interval (simplified)
-  const variance = calculateVariance(cards);
-  const stdDev = Math.sqrt(variance);
-  const confidenceInterval = {
-    lower: Math.max(0, score - 1.96 * stdDev),
-    upper: Math.min(100, score + 1.96 * stdDev)
-  };
-
-  return {
-    predicted: Math.round(score),
-    confidence: confidenceInterval
-  };
-}
-```
-
-### 4. Leech Detection
-
-```javascript
-function detectLeeches(cards) {
-  // A card is a "leech" if:
-  // 1. It has been reviewed >5 times
-  // 2. It has <2 successful repetitions
-  // 3. OR it's marked difficult and has low success rate
-
-  return cards.filter(card => {
-    const totalReviews = countReviews(card); // Track from history
-    const successRate = card.repetitions / totalReviews;
-
-    return (totalReviews > 5 && card.repetitions < 2) ||
-           (card.isDifficult && successRate < 0.4);
-  });
-}
-```
-
-### 5. Fuzzy Search
-
-```javascript
-function fuzzyMatch(search, text, threshold = 2) {
-  // Levenshtein distance algorithm
-  const searchLower = search.toLowerCase();
-  const textLower = text.toLowerCase();
-
-  if (textLower.includes(searchLower)) return true; // Exact match
-
-  // Calculate edit distance
-  const distance = levenshteinDistance(searchLower, textLower);
-
-  return distance <= threshold;
-}
-
-function levenshteinDistance(a, b) {
-  const matrix = [];
-
-  for (let i = 0; i <= b.length; i++) {
-    matrix[i] = [i];
-  }
-
-  for (let j = 0; j <= a.length; j++) {
-    matrix[0][j] = j;
-  }
-
-  for (let i = 1; i <= b.length; i++) {
-    for (let j = 1; j <= a.length; j++) {
-      if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1, // substitution
-          matrix[i][j - 1] + 1,     // insertion
-          matrix[i - 1][j] + 1      // deletion
-        );
-      }
-    }
-  }
-
-  return matrix[b.length][a.length];
-}
-```
-
----
-
-## Component Hierarchy
-
-```
-App
-├── Sidebar
-│   ├── Search
-│   ├── ModuleFilter
-│   ├── StatsWidget (streak, level, daily goal)
-│   └── QuickActions
-│
-├── MainContent (routed by view state)
-│   ├── Dashboard
-│   │   ├── ProgressOverview
-│   │   ├── ModuleCards
-│   │   └── DueCardsWidget
-│   │
-│   ├── StudySession
-│   │   ├── ModeSelector (classic, cloze, reverse, MCQ, free-recall)
-│   │   ├── CardDisplay
-│   │   ├── RatingButtons
-│   │   └── ProgressBar
-│   │
-│   ├── Diagrams
-│   │   ├── DiagramSelector
-│   │   ├── SVGDiagram (interactive)
-│   │   └── DiagramProgress
-│   │
-│   ├── KnowledgeGraph
-│   │   ├── D3Visualization
-│   │   ├── GraphControls (zoom, filter)
-│   │   └── NodeDetails
-│   │
-│   ├── ExamMode
-│   │   ├── ExamSetup
-│   │   ├── ExamSession (timer, questions, nav)
-│   │   └── ExamReview
-│   │
-│   ├── Analytics
-│   │   ├── ModuleHeatmap
-│   │   ├── LeechList
-│   │   ├── ForgettingCurve (chart)
-│   │   ├── ScorePrediction
-│   │   └── WeakAreas
-│   │
-│   ├── Mnemonics
-│   │   ├── MnemonicList
-│   │   ├── PracticeMode
-│   │   └── QuizMode
-│   │
-│   └── Achievements
-│       ├── LevelDisplay
-│       ├── XPProgressBar
-│       ├── AchievementGrid
-│       └── DailyGoals
-│
-└── Notifications (achievement unlocks, reminders)
-```
-
----
-
-## State Management
-
-### localStorage Schema
-
-```javascript
-// Key: neuro-cards-v3
-{
-  version: 3,
-  cards: [...],                    // Array of card objects
-  lastSync: "2024-12-30T15:00:00Z"
-}
-
-// Key: neuro-diagrams-v3
-{
-  version: 3,
-  progress: {...},                 // Diagram progress object
-  lastUpdated: "2024-12-30T15:00:00Z"
-}
-
-// Key: neuro-gamification-v3
-{
-  version: 3,
-  level: 3,
-  xp: 1250,
-  achievements: [...],
-  streaks: {...},
-  dailyGoal: {...}
-}
-
-// Key: neuro-exam-history-v3
-{
-  version: 3,
-  exams: [...]                     // Array of exam result objects
-}
-
-// Key: neuro-settings-v3
-{
-  version: 3,
-  theme: "light",                  // light | dark
-  studyMode: "classic",            // default study mode
-  dailyGoalTarget: 20,
-  notificationsEnabled: false,
-  soundsEnabled: true
-}
-```
-
-### State Persistence Strategy
-
-1. **Auto-save**: Every 30 seconds (debounced)
-2. **On navigation**: Before changing views
-3. **On unload**: Before window closes
-4. **Recovery**: On crash/refresh, restore from localStorage
-
----
-
-## Performance Optimizations
-
-### 1. Virtualization (for large lists)
-
-```javascript
-// Only render visible cards (windowing)
-function VirtualizedCardList({ cards, renderCard }) {
-  const [visibleRange, setVisibleRange] = useState([0, 20]);
-
-  const handleScroll = (e) => {
-    const scrollTop = e.target.scrollTop;
-    const startIndex = Math.floor(scrollTop / CARD_HEIGHT);
-    const endIndex = startIndex + VISIBLE_COUNT;
-    setVisibleRange([startIndex, endIndex]);
-  };
-
-  const visibleCards = cards.slice(visibleRange[0], visibleRange[1]);
-
-  return (
-    <div onScroll={handleScroll}>
-      {visibleCards.map(renderCard)}
-    </div>
-  );
-}
-```
-
-### 2. Debouncing (for search)
-
-```javascript
-function useDebounce(value, delay = 300) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-```
-
-### 3. Memoization (expensive computations)
-
-```javascript
-// Memoize analytics calculations
-const analytics = useMemo(() => {
-  return calculateAnalytics(cards);
-}, [cards]); // Only recalculate when cards change
-```
-
----
-
-## Security Considerations
-
-1. **No server-side code** - Pure client-side app
-2. **No user authentication** - Single-user local storage
-3. **Data privacy** - All data stays in browser
-4. **XSS protection** - React auto-escapes user input
-5. **CSP headers** (optional for deployment)
-
----
-
-## Browser Compatibility
-
-**Minimum requirements:**
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-**Features used:**
-- ES6+ (let/const, arrow functions, destructuring)
-- localStorage API (pentru progresul local); service worker-ul este planificat, nu livrat
-- CSS Grid & Flexbox
-- SVG 1.1
-
----
-
-## Deployment
-
-### Option 1: Local File
 ```bash
-# Just open the file in browser
-open neurostiinte-improved.html
+node --check cards-data.js
+node --check nobel-app.js
+node --check sw.js
+node -e "JSON.parse(require('fs').readFileSync('manifest.webmanifest','utf8'))"
+git diff --check
 ```
 
-### Option 2: GitHub Pages
-```bash
-git add neurostiinte-improved.html
-git commit -m "Update neuroscience flashcards"
-git push origin main
+Verificarea în browser trebuie să acopere panoul, Atlasul, toate modurile de studiu, examenul, progresul, setările, tema întunecată, exportul/importul și comportamentul offline după prima încărcare.
 
-# Pages este deja configurat; rădăcina redirecționează la aplicație.
-# URL: https://mariuscomper.github.io/neuroscience-flashcards/
-```
+## Limite
 
----
-
-## Development Workflow
-
-### Making changes:
-1. Edit `neurostiinte-improved.html` for changes to the current public app
-2. Refresh browser to see changes
-3. Test in DevTools console
-4. Commit to git
-
-### Debugging:
-- Chrome DevTools → Application → localStorage
-- React DevTools (if using the browser extension)
-- Console logs (search for "// DEBUG:")
-
-### Testing localStorage:
-```javascript
-// In browser console
-localStorage.getItem('neuro-cards-v3');
-localStorage.clear(); // Reset all data
-```
-
----
-
-## Known Limitations
-
-1. **No cloud sync** - Data only in one browser
-2. **Storage limits** - localStorage ~10MB limit
-3. **No collaborative features** - Single-user only
-4. **No PWA în versiunea actuală** - nu există service worker sau mod offline garantat
-5. **Manual page refs** - Not linked to actual PDF
-
----
-
-## Future Technical Improvements
-
-1. **IndexedDB migration** - For larger storage
-2. **WebAssembly** - For faster algorithms
-3. **WebRTC** - For multiplayer features
-4. **Canvas rendering** - For complex diagrams
-5. **TypeScript** - For type safety
-6. **Unit tests** - Jest + React Testing Library
-
----
-
-**Last Updated**: 2026-09-07
-**Version**: 2.0.0 (aplicația de bază; Nobel Edition — plan)
+Runtime-ul nu folosește un server și nu poate oferi sincronizare sau notificări între dispozitive. Rezultatele examenului sunt orientative. Conținutul educațional trebuie confruntat cu sursa didactică și nu este sfat medical.

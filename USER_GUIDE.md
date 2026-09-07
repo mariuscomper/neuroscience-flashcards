@@ -1,84 +1,62 @@
 # Ghid de utilizare — Neuroștiințe UBB
 
-## Starea aplicației
-
-Acest ghid descrie aplicația publică actuală, neurostiinte-improved.html. Ea conține 812 carduri împărțite în șase module, repetare spațiată, căutare, marcarea cardurilor dificile și salvarea progresului în browser.
-
-Documentele despre Nobel Edition descriu funcții propuse. Diagramele interactive, simulatorul de examen, analiticele avansate, modurile suplimentare de studiu, gamificarea și PWA nu sunt disponibile în versiunea actuală.
-
 ## Pornire
 
-1. Deschide [aplicația publică](https://mariuscomper.github.io/neuroscience-flashcards/) sau fișierul neurostiinte-improved.html.
-2. La prima încărcare, asigură-te că ai acces la internet: React, ReactDOM, Babel și fonturile sunt încărcate de pe CDN.
-3. Alege un modul și apasă „Învață” pentru cardurile care trebuie repetate sau „Toate” pentru întregul modul.
-4. Pentru o sesiune generală, folosește butonul de repetare a cardurilor scadente de pe panoul principal.
+Deschide [aplicația live](https://mariuscomper.github.io/neuroscience-flashcards/) sau, local, `neurostiinte-improved.html`. Prima încărcare descarcă doar fișierele proiectului; aplicația nu folosește biblioteci externe. După prima încărcare într-un browser compatibil, service worker-ul poate păstra aplicația disponibilă offline.
 
-## Cum se studiază un card
+## Panoul
 
-1. Citește întrebarea.
-2. Apasă pe card pentru a afișa răspunsul.
-3. Dacă întrebarea îți creează probleme, apasă „Marchează ca dificil”.
-4. Alege evaluarea potrivită:
-   - „Nu știam” resetează progresul cardului;
-   - „Greu” mărește puțin intervalul până la următoarea repetare;
-   - „Bine” mărește moderat intervalul;
-   - „Ușor” mărește mai mult intervalul.
+Panoul principal arată numărul de carduri, ce este scadent, progresul pe cele șase module, seria de studiu și obiectivul zilnic. „Începe repetarea” deschide cardurile scadente; din fiecare modul poți alege fie cardurile scadente, fie toate cardurile.
 
-Un card este considerat stăpânit după cel puțin trei repetări reușite. Butonul „Înapoi” te duce la panoul principal fără să pierzi progresul deja salvat.
+## O sesiune de studiu
 
-## Panoul principal
+1. Citește întrebarea înainte să afișezi răspunsul.
+2. Apasă pe card sau folosește bara de spațiu pentru dezvăluire.
+3. Alege evaluarea care descrie cât de bine ai știut răspunsul.
+4. Repetă până când cardurile scadente se epuizează sau încheie sesiunea.
 
-Panoul afișează:
+Evaluarea schimbă intervalul următoarei reveniri. „Nu știam” și „Greu” readuc cardul curând; „Bine” și „Ușor” extind intervalul. „Marchează dificil” adaugă un reper vizual pentru filtrare.
 
-- numărul total de carduri;
-- cardurile care trebuie repetate;
-- cardurile stăpânite;
-- cardurile marcate ca dificile;
-- progresul separat pentru modulele M1–M6.
+## Cele cinci moduri
 
-Cronometrul de studiu poate fi pornit și oprit cu „Start” și „Pauză”. El este doar un ajutor pentru organizarea sesiunii și nu schimbă programarea cardurilor.
+- **Clasic:** întrebare, apoi răspuns.
+- **Completare:** o porțiune a răspunsului este ascunsă.
+- **Invers:** răspunsul este punctul de plecare, iar întrebarea trebuie reconstruită.
+- **Grilă:** alegi una dintre patru variante.
+- **Reamintire:** scrii ce îți amintești înainte de a verifica răspunsul.
 
-## Căutare
+În toate modurile, evaluarea rămâne autoevaluare; aplicația nu pretinde că poate măsura complet înțelegerea.
 
-Apasă „Caută în carduri” și introdu un text. Căutarea verifică atât întrebările, cât și răspunsurile, fără deosebire între litere mari și mici. Rezultatele afișează modulul, răspunsul și numărul de repetări.
+## Atlasul
 
-## Salvarea și mutarea progresului
+Atlasul are patru secțiuni:
 
-Progresul este salvat automat în localStorage, pe dispozitivul și în browserul curent. Nu există cont, sincronizare în cloud sau istoric comun între dispozitive.
+- **Carduri:** caută în întrebări și răspunsuri și filtrează după modul sau stare;
+- **Diagrame:** explorează șase scheme SVG și selectează noduri pentru explicații;
+- **Hartă conceptuală:** urmărește 12 concepte și relațiile lor orientative;
+- **Mnemonice:** folosește 12 asocieri scurte pentru a porni reamintirea.
 
-- „Export progres” descarcă o copie JSON a progresului.
-- „Import progres” încarcă o copie JSON existentă; fă un export înainte dacă vrei să păstrezi starea curentă.
-- „Reset progres” reinițializează progresul local.
+Căutarea este textuală și nu este o căutare semantică tolerantă la greșeli.
 
-Păstrează exporturile într-un loc sigur dacă schimbi browserul sau ștergi datele site-ului.
+## Simulatorul de examen
 
-## O rutină simplă
+Alege 10, 20 sau 50 de întrebări. Ai 45 de minute, poți reveni la întrebările anterioare și poți încheia mai devreme. La final primești procentul și repartizarea răspunsurilor pe module. Rezultatul este un reper personal, nu o estimare validată a notei.
 
-Pentru o sesiune zilnică:
+## Progres și setări
 
-1. repetă mai întâi cardurile scadente;
-2. lucrează apoi cardurile marcate ca dificile;
-3. adaugă carduri noi dintr-un singur modul;
-4. exportă progresul periodic.
+Pagina „Progres” afișează acuratețea cardurilor evaluate, activitatea ultimelor 14 zile, seria, reperele și situația fiecărui modul. În „Setări” poți schimba tema, obiectivul zilnic, exporta sau importa progresul și reseta datele locale.
 
-Un ritm constant este mai util decât o sesiune foarte lungă urmată de o pauză de mai multe zile.
+Exportul este un fișier JSON. Fă un export înainte de resetare sau înainte de a schimba browserul. Importul înlocuiește starea locală a cardurilor cu starea din fișier.
 
-## Limite cunoscute
+## Tastatură și accesibilitate
 
-- Aplicația nu are cont și nu sincronizează datele între dispozitive.
-- Nu există service worker, PWA sau funcționare offline garantată.
-- Încărcarea inițială are nevoie de internet pentru bibliotecile și fonturile de pe CDN.
-- Căutarea actuală este textuală; nu face căutare semantică și nu corectează automat greșelile de scriere.
-- Funcțiile Nobel Edition rămân în documentația de planificare și trebuie implementate și testate separat înainte de a fi promovate ca disponibile.
+- `/` — focalizează căutarea din Atlas sau deschide Atlasul;
+- bara de spațiu — afișează răspunsul în modul clasic/completare/invers;
+- `1`–`4` — evaluează răspunsul după dezvăluire;
+- `Tab` și `Enter` — navighează controalele.
 
-## Depanare
+Există legătură de salt la conținut, etichete pentru progres și controale de temă cu nume accesibil. Interfața respectă preferința de mișcare redusă.
 
-**Pagina rămâne goală:** verifică accesul la CDN și reîncarcă pagina. Dacă ai deschis fișierul local, încearcă și adresa GitHub Pages.
+## Date și limite
 
-**Progresul a dispărut:** verifică dacă folosești același browser și aceeași adresă. Dacă ai un export JSON, folosește „Import progres”.
-
-**Vrei să începi de la zero:** folosește „Reset progres” numai după ce ai făcut un export, dacă există date pe care ai putea dori să le păstrezi.
-
-## Date și confidențialitate
-
-Aplicația nu are server propriu, cont sau telemetrie configurată. Cardurile și progresul rămân în browserul local; bibliotecile și fonturile sunt cerute de la furnizorii CDN la încărcarea paginii.
+Cardurile și progresul rămân în browserul curent. Nu există cont, telemetrie configurată sau sincronizare în cloud. Aplicația este un instrument educațional; verifică afirmațiile importante cu materialul de curs și literatura de specialitate.
